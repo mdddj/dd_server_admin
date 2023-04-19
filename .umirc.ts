@@ -7,12 +7,13 @@ export default defineConfig({
   initialState: {},
   request: {},
   layout: {
-    title: '@umijs/max',
+    title: 'demo',
   },
   routes: [
     {
       path: '/',
       redirect: '/home',
+      access: 'canSeeAdmin'
     },
     {
       name: '首页',
@@ -29,6 +30,17 @@ export default defineConfig({
       path: '/table',
       component: './Table',
     },
+    {
+      name: '登录',
+      path: '/login',
+      component: './Login',
+      layout: false
+    },
+    {
+      name: '用户管理',
+      path: '/users',
+      component: './Users'
+    }
   ],
   npmClient: 'pnpm',
 });
