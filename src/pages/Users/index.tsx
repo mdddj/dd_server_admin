@@ -1,9 +1,9 @@
 import React from 'react';
-import {ApiQueryUserList} from "@/services/user";
 import {ProFormSelect, ProTable} from "@ant-design/pro-components";
 import {User, Vip} from "@/types/user";
 import {Space, Tag} from "antd";
 import UpdateFromModal from "@/components/users/form/Update";
+import {ApiQueryUserList} from "@/services/user/UserController";
 
 export default function Page() {
     return (
@@ -120,7 +120,8 @@ export default function Page() {
                                 {!entity.openAiTokens && <span>0</span>}
                                 {entity.openAiTokens && <span>{entity.openAiTokens}</span>}
                                 <UpdateFromModal initValue={entity.openAiTokens?.toString() ?? '0'} title={'充值token'}
-                                                 id={entity.id} onSuccess={() => action?.reload()} name={'tokens'} tigger={<a>充值</a>}/>
+                                                 id={entity.id} onSuccess={() => action?.reload()} name={'tokens'}
+                                                 tigger={<a>充值</a>}/>
                             </Space>
                         }
                     },

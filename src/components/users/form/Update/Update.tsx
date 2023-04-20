@@ -1,7 +1,8 @@
 import React from 'react'
 import {ModalForm, ProFormText} from "@ant-design/pro-components";
-import {ApiUpdateUserInfo} from "@/services/user";
 import {EditOutlined} from "@ant-design/icons";
+import {ApiUpdateUserInfo} from "@/services/user/UserController";
+
 
 type UpdateFromProp = {
     initValue: string,

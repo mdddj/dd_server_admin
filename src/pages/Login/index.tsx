@@ -1,6 +1,5 @@
 import React, {CSSProperties, useState} from 'react';
 import {Divider, message, Space, Tabs} from "antd";
-import {ApiLogin} from "@/services/user";
 import {setJwtToken} from "@/utils/cache";
 import {useModel} from "@umijs/max";
 import {history} from "@@/exports";
@@ -14,6 +13,7 @@ import {
     WeiboOutlined
 } from "@ant-design/icons";
 import {LoginForm, ProFormCaptcha, ProFormCheckbox, ProFormText} from "@ant-design/pro-components";
+import {ApiLogin} from "@/services/user/UserController";
 
 
 type LoginType = 'phone' | 'account';

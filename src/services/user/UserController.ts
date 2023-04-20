@@ -1,4 +1,4 @@
-import {request} from '@@/plugin-request'
+import {request} from '@umijs/max'
 import {User} from "@/types/user";
 import {CoverToPageData, Result} from "@/types/result";
 
