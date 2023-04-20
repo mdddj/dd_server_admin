@@ -1,33 +1,44 @@
 import React from 'react'
 import {ModalForm, ProFormText} from "@ant-design/pro-components";
-import {Button} from "antd";
+import {ApiUpdateUserInfo} from "@/services/user";
+import {EditOutlined} from "@ant-design/icons";
 
-type UpdateFromProp<T> = {
+type UpdateFromProp = {
     initValue: string,
-    label: string,
-    name: string,
-    buttonText: string,
-    title: string,
-    onFinish: (values: T) => Promise<boolean>
+    label?: string,
+    name?: string,
+    title?: string,
+    id: number,
+    onSuccess: () => void,
+    dom?: React.ReactNode,
+    tigger?: JSX.Element | undefined
 }
-export default class UpdateFromModal<T> extends React.Component<UpdateFromProp<T>> {
+export default class UpdateFromModal<T> extends React.Component<UpdateFromProp> {
     render() {
         return <ModalForm<T>
             width={300}
             title={this.props.title}
             trigger={
-                <Button>
-                    {this.props.buttonText}
-                </Button>
+              this.props.tigger ??  <EditOutlined />
             }
             autoFocusFirstInput={true}
             modalProps={{
                 destroyOnClose: true
             }}
-            onFinish={this.props.onFinish}
+            onFinish={ async values => {
+                await ApiUpdateUserInfo({
+                    ...values,
+                    id: this.props.id
+                })
+                this.props.onSuccess()
+                return true
+            }}
         >
-            <ProFormText key={this.props.name} name={this.props.name} label={this.props.label}
-                         initialValue={this.props.initValue}></ProFormText>
+            {
+                !this.props.dom && <ProFormText key={this.props.name} name={this.props.name} label={this.props.label}
+                                                        initialValue={this.props.initValue}></ProFormText>
+            }
+            {this.props.dom !== null && this.props.dom}
         </ModalForm>
     }
 }

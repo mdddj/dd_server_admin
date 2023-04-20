@@ -46,8 +46,8 @@ export default function Page() {
         <div style={{backgroundColor: 'white'}}>
             <LoginForm
                 logo="https://github.githubassets.com/images/modules/logos_page/Octocat.png"
-                title="VCM-DD"
-                subTitle="Classic Server Management Platform"
+                title="VCM-AI"
+                subTitle="后台管理平台"
                 onFinish={doLogin}
                 actions={
                     <div

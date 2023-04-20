@@ -1,8 +1,8 @@
 import React from 'react';
 import {ApiQueryUserList} from "@/services/user";
-import {ProTable} from "@ant-design/pro-components";
-import {User} from "@/types/user";
-import {Dropdown, Space} from "antd";
+import {ProFormSelect, ProTable} from "@ant-design/pro-components";
+import {User, Vip} from "@/types/user";
+import {Space, Tag} from "antd";
 import UpdateFromModal from "@/components/users/form/Update";
 
 export default function Page() {
@@ -33,7 +33,16 @@ export default function Page() {
                     {
                         key: 'nickName',
                         title: '昵称',
-                        dataIndex: 'nickName'
+                        dataIndex: 'nickName',
+                        render: (_, entity, number, action) => {
+                            return <Space>
+                                <span>{entity.nickName}</span>
+                                <UpdateFromModal<{ nickName: string }> title={'修改昵称'} name={'nickName'}
+                                                                       initValue={entity.nickName} label={'输入昵称'}
+                                                                       id={entity.id}
+                                                                       onSuccess={() => action?.reload()}/>
+                            </Space>
+                        }
                     },
                     {
                         key: 'email',
@@ -64,12 +73,56 @@ export default function Page() {
                     {
                         key: 'vip',
                         title: '会员类型',
-                        dataIndex: 'vip'
+                        dataIndex: 'vip',
+                        render: (dom, entity, number, action) => {
+                            let text = <span></span>;
+                            switch (entity.vip) {
+                                case Vip.no : {
+                                    text = <span>未开通</span>
+                                    break
+                                }
+                                case Vip.vip : {
+                                    text = <Tag color={'blue'}>普通会员</Tag>
+                                    break
+                                }
+                                case Vip.super: {
+                                    text = <Tag color={'purple'}>企业会员</Tag>
+                                    break
+                                }
+                            }
+                            return <Space>
+                                {text}
+                                <UpdateFromModal<{ vip: string }> title={'修改账号会员类型'}
+                                                                  initValue={entity.nickName}
+                                                                  id={entity.id}
+                                                                  dom={<ProFormSelect options={[
+                                                                      {
+                                                                          label: '普通会员 (20/月)',
+                                                                          value: 1
+                                                                      },
+                                                                      {
+                                                                          label: '企业会员 (188/月)',
+                                                                          value: 2
+                                                                      }
+                                                                  ]} name={'vip'} initialValue={entity.vip}>
+
+                                                                  </ProFormSelect>}
+                                                                  onSuccess={() => action?.reload()}/>
+                            </Space>
+                        }
                     },
                     {
                         key: 'openAiTokens',
-                        title: 'AI余量',
-                        dataIndex: 'openAiTokens'
+                        title: 'Tokens余额',
+                        dataIndex: 'openAiTokens',
+                        render: (dom, entity, number, action) => {
+                            return <Space>
+                                {!entity.openAiTokens && <span>0</span>}
+                                {entity.openAiTokens && <span>{entity.openAiTokens}</span>}
+                                <UpdateFromModal initValue={entity.openAiTokens?.toString() ?? '0'} title={'充值token'}
+                                                 id={entity.id} onSuccess={() => action?.reload()} name={'tokens'} tigger={<a>充值</a>}/>
+                            </Space>
+                        }
                     },
                     {
                         key: 'status',
@@ -79,15 +132,8 @@ export default function Page() {
                     {
                         title: '操作',
                         key: 'action',
-                        render: (dom, entity) => {
+                        render: () => {
                             return <Space>
-                                <UpdateFromModal<{ nickName: string }> title={'修改昵称'} name={'nickName'}
-                                                                       initValue={entity.nickName} label={'输入昵称'}
-                                                                       buttonText={'修改昵称'}
-                                                                       onFinish={async values => {
-                                                                           console.log(values)
-                                                                           return true
-                                                                       }}/>
                                 <a>删除</a>
                             </Space>
                         }

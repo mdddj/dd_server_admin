@@ -29,12 +29,13 @@ export function onRouteChange({location}: any) {
 
 let token = getJwtToken()
 export const request: RequestConfig = {
-    baseURL: "http://192.168.199.70",
+    baseURL: "http://192.168.199.80",
     headers: token !== null ? {
         "Authorization": token
     } : {},
     errorConfig: {
         errorHandler(error: any, opts: any) {
+
             if (opts?.skipErrorHandler) throw error;
             if (error.name === 'BizError') {
                 const errorInfo: ResponseStructure | undefined = error.info;
