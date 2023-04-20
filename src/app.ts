@@ -2,64 +2,67 @@
 
 // 全局初始化数据配置，用于 Layout 用户信息和权限初始化
 // 更多信息见文档：https://umijs.org/docs/api/runtime-config#getinitialstate
-import {RequestConfig} from "@@/plugin-request/request";
-import {getJwtToken} from "@/utils/cache";
-import {history} from "@@/core/history";
-import {message} from "antd";
+import { RequestConfig } from "@@/plugin-request/request";
+import { getJwtToken, removeJwtToken } from "@/utils/cache";
+import { history } from "@@/core/history";
+import { message } from "antd";
 
 export async function getInitialState(): Promise<{ name: string }> {
-    return {name: "hello"}
+  return { name: "hello" };
 }
 
 export const layout = () => {
-    return {
-        logo: 'https://img.alicdn.com/tfs/TB1YHEpwUT1gK0jSZFhXXaAtVXa-28-27.svg',
-        menu: {
-            locale: false,
-        },
-    };
+  return {
+    logo: "https://img.alicdn.com/tfs/TB1YHEpwUT1gK0jSZFhXXaAtVXa-28-27.svg",
+    menu: {
+      locale: false
+    }
+  };
 };
 
-export function onRouteChange({location}: any) {
-    let token = getJwtToken()
-    if (token === null && location.pathname !== '/login') {
-        history.push('/login'); // 重定向到登录页面
-    }
+export function onRouteChange({ location }: any) {
+  let token = getJwtToken();
+  if (token === null && location.pathname !== "/login") {
+    history.push("/login"); // 重定向到登录页面
+  }
 }
 
-let token = getJwtToken()
+let token = getJwtToken();
 export const request: RequestConfig = {
-    baseURL: "http://192.168.199.80",
-    headers: token !== null ? {
-        "Authorization": token
-    } : {},
-    errorConfig: {
-        errorHandler(error: any, opts: any) {
-
-            if (opts?.skipErrorHandler) throw error;
-            if (error.name === 'BizError') {
-                const errorInfo: ResponseStructure | undefined = error.info;
-                if (errorInfo) {
-                    message.error(errorInfo.message).then(() => {
-                    })
-                }
-            }
-        },
-        errorThrower(res: ResponseStructure) {
-            console.log("....res:" + res)
-            if (!res.success) {
-                const error: any = new Error(res.message);
-                error.name = 'BizError';
-                error.info = res;
-                throw error;
-            }
+  baseURL: "http://localhost",
+  headers: token !== null ? {
+    "Authorization": token
+  } : {},
+  errorConfig: {
+    errorHandler(error: any, opts: any) {
+      if (opts?.skipErrorHandler) throw error;
+      if (error.name === "BizError") {
+        const errorInfo: ResponseStructure | undefined = error.info;
+        if (errorInfo) {
+          message.error(errorInfo.message).then(() => {
+          });
         }
+        if (errorInfo?.state === 401) {
+          location.href = "/login?m=" + errorInfo?.message ?? "";
+          removeJwtToken();
+        }
+      }
+    },
+    errorThrower(res: ResponseStructure) {
+      console.log("....res:" + res);
+      if (!res.success) {
+        const error: any = new Error(res.message);
+        error.name = "BizError";
+        error.info = res;
+        throw error;
+      }
     }
+  }
 };
 
 interface ResponseStructure {
-    state: number,
-    data: any,
-    message: string,
-    success: boolean
+  state: number,
+  data: any,
+  message: string,
+  success: boolean
 }

@@ -18,3 +18,8 @@ export interface Page {
     paged: boolean;
     total: number;
 }
+
+export interface PageModel {
+    page: number,
+    pageSize: number
+}

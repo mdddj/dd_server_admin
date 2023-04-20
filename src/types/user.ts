@@ -1,3 +1,5 @@
+import { Enterprise } from "@/types/enterprose";
+
 export interface User {
     accountNonExpired: boolean;
     accountNonLocked: boolean;
@@ -20,6 +22,7 @@ export interface User {
     username: string;
     vip: Vip;
     wallet: null;
+    enterprise:Enterprise|undefined
 }
 
 export enum Vip {
