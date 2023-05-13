@@ -25,6 +25,6 @@ export async function ApiEnterpriseFindList(params:any) {
  * 查找全部公司
  * @constructor
  */
-export async function ApiEnterpriseFindAll() {
+export async function ApiEnterpriseFindAll() : Promise<Result<Enterprise[]>> {
   return request<Result<Enterprise[]>>("/api/enterprise/findAll")
 }

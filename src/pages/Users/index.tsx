@@ -1,10 +1,11 @@
 import React from "react";
 import { ProFormSelect } from "@ant-design/pro-components";
 import { User, Vip } from "@/types/user";
-import { Space, Tag } from "antd";
+import { Popconfirm, Space, Tag } from "antd";
 import UpdateFromModal from "@/components/users/form/Update";
-import { ApiQueryUserList } from "@/services/user/UserController";
+import { ApiDeleteUser, ApiQueryUserList } from "@/services/user/UserController";
 import ApiTable from "@/components/Apitable";
+import { ApiEnterpriseFindAll } from "@/services/enterprise/EnterpriseController";
 
 export default function Page() {
   return (
@@ -88,7 +89,6 @@ export default function Page() {
               return <Space>
                 {text}
                 <UpdateFromModal<{ vip: string }> title={"修改账号会员类型"}
-                                                  initValue={entity.nickName}
                                                   id={entity.id}
                                                   dom={<ProFormSelect options={[
 
@@ -136,7 +136,17 @@ export default function Page() {
             dataIndex: "enterprise",
             render: (dom, entity) => {
               return <Space>
-                {!entity.enterprise && <a>绑定企业</a>}
+                {!entity.enterprise && <UpdateFromModal<{ enterpriseId: number }> id={entity.id} onSuccess={() => {
+                }} dom={<ProFormSelect request={async () => {
+                  let r = await ApiEnterpriseFindAll();
+                  return [...r.data.map(value => {
+                    return {
+                      label: value.name,
+                      value: value.id
+                    };
+                  })];
+                }
+                } name={"enterpriseId"} />} tigger={<a>关联企业</a>} title={"绑定企业"} />}
                 {entity.enterprise && <Tag>{entity.enterprise.name}</Tag>}
               </Space>;
             }
@@ -144,9 +154,14 @@ export default function Page() {
           {
             title: "操作",
             key: "action",
-            render: () => {
+            render: (dom, entity, number, action) => {
               return <Space>
-                <a>删除</a>
+                <Popconfirm title={"删除用户"} description={"确定要删除该用户的相关数据吗? "} onConfirm={async () => {
+                  await ApiDeleteUser({ id: entity.id });
+                  action?.reload();
+                }}>
+                  <a>删除</a>
+                </Popconfirm>
               </Space>;
             }
           }

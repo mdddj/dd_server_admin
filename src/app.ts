@@ -42,7 +42,7 @@ export const request: RequestConfig = {
           message.error(errorInfo.message).then(() => {
           });
         }
-        if (errorInfo?.state === 401) {
+        if (errorInfo?.state === 401 || errorInfo?.state === 302) {
           location.href = "/login?m=" + errorInfo?.message ?? "";
           removeJwtToken();
         }

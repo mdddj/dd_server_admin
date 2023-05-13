@@ -35,7 +35,7 @@ export default function Page() {
             console.log(result)
             setJwtToken(result.data.token)
             setInitialState(result.data.user)
-            history.push('/home')
+            location.href = '/home'
         } catch (e) {
             hide()
         }

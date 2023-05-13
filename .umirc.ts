@@ -56,6 +56,17 @@ export default defineConfig({
                     component: './Enterprise/create'
                 }
             ]
+        },
+        {
+            name: "权限管理",
+            path: "/role",
+            routes: [
+                {
+                    name: "权限列表",
+                    path: "/role/list",
+                    component: "./Role/list"
+                }
+            ]
         }
     ],
     npmClient: 'pnpm',

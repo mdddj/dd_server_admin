@@ -5,7 +5,7 @@ import {ApiUpdateUserInfo} from "@/services/user/UserController";
 
 
 type UpdateFromProp = {
-    initValue: string,
+    initValue?: string,
     label?: string,
     name?: string,
     title?: string,

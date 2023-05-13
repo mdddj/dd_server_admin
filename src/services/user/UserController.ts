@@ -1,6 +1,6 @@
-import {request} from '@umijs/max'
-import {User} from "@/types/user";
-import {CoverToPageData, Result} from "@/types/result";
+import { request } from "@umijs/max";
+import { User } from "@/types/user";
+import { CoverToPageData, Result } from "@/types/result";
 
 /**
  * 登录接口
@@ -8,10 +8,10 @@ import {CoverToPageData, Result} from "@/types/result";
  * @constructor
  */
 export async function ApiLogin(data: any) {
-    return request("/api/user-public/login", {
-        method: 'POST',
-        data
-    })
+  return request("/api/user-public/login", {
+    method: "POST",
+    data
+  });
 }
 
 /**
@@ -19,7 +19,7 @@ export async function ApiLogin(data: any) {
  * @constructor
  */
 export async function ApiGetCurrentUser(): Promise<Result<User>> {
-    return request("/api/get-user-by-token")
+  return request("/api/get-user-by-token");
 }
 
 /**
@@ -28,9 +28,9 @@ export async function ApiGetCurrentUser(): Promise<Result<User>> {
  * @constructor
  */
 export async function ApiQueryUserList(pageParam: any): Promise<Result<CoverToPageData<User>>> {
-    return request('/api/user/list', {
-        params: pageParam,
-    })
+  return request("/api/user/list", {
+    params: pageParam
+  });
 }
 
 /**
@@ -39,8 +39,32 @@ export async function ApiQueryUserList(pageParam: any): Promise<Result<CoverToPa
  * @constructor
  */
 export async function ApiUpdateUserInfo(params: any) {
-    return request<Result<User>>("/api/user/update", {
-        method: 'POST',
-        data: params
-    })
+  return request<Result<User>>("/api/user/update", {
+    method: "POST",
+    data: params
+  });
+}
+
+/**
+ * 修改用户密码
+ * @param params
+ * @constructor
+ */
+export async function ApiUpdateUserPassword(params: { currentPass: string, rePassword: string }) {
+  return request<Result<string>>("/api/auth/user-update-pass", {
+    method: "POST",
+    data: params
+  });
+}
+
+/**
+ * 删除用户
+ * @param params
+ * @constructor
+ */
+export async function ApiDeleteUser(params: {id: number}) {
+  return request("/api/auth/deleteUser",{
+    method: 'DELETE',
+    params
+  })
 }
