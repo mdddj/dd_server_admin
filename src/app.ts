@@ -7,6 +7,8 @@ import { getJwtToken, removeJwtToken } from "@/utils/cache";
 import { history } from "@@/core/history";
 import { message } from "antd";
 
+
+
 export async function getInitialState(): Promise<{ name: string }> {
   return { name: "hello" };
 }
@@ -29,9 +31,9 @@ export function onRouteChange({ location }: any) {
 
 let token = getJwtToken();
 export const request: RequestConfig = {
-  baseURL: "http://localhost",
+  baseURL: 'http://localhost',
   headers: token !== null ? {
-    "Authorization": token
+    'Authorization' : token
   } : {},
   errorConfig: {
     errorHandler(error: any, opts: any) {

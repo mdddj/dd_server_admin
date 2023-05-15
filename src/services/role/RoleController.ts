@@ -1,5 +1,6 @@
 import { request } from "@@/plugin-request";
 import { CoverToPageData, Result } from "@/types/result";
+import RoleApi from "./types";
 
 
 /**

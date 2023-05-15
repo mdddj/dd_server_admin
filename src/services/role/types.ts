@@ -4,3 +4,5 @@ declare namespace RoleApi {
     name: string
   }
 }
+
+export default RoleApi

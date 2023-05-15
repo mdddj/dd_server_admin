@@ -67,6 +67,38 @@ export default defineConfig({
                     component: "./Role/list"
                 }
             ]
+        },
+        {
+            name: "文件管理",
+            path: "/file",
+            routes: [
+                {
+                    name: "上传文件",
+                    path: "/file/upload",
+                    component: "./File/upload"
+                },
+                {
+                    name: "文件列表",
+                    path: "/file/list",
+                    component: "./File/list"
+                }
+            ]
+        },
+        {
+            name: "文章管理",
+            path: "/blog",
+            routes: [
+                {
+                    name: "文章列表",
+                    path: "/blog/list",
+                    component: "./Blog/list"
+                },
+                {
+                    name: "发布文章",
+                    path: "/blog/add",
+                    component: "./Blog/add"
+                }
+            ]
         }
     ],
     npmClient: 'pnpm',

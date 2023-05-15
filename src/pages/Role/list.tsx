@@ -3,8 +3,7 @@ import ApiTable from "@/components/Apitable";
 import { DeleteRoleById, GetRoleListApiByPage, SaveOrUpdateRole } from "@/services/role/RoleController";
 import { ModalForm, PageContainer, ProFormRadio, ProFormText, ProFormTextArea } from "@ant-design/pro-components";
 import { Button, Card, Popconfirm, Space, message } from "antd";
-import Role = RoleApi.Role;
-
+import RoleApi from "@/services/role/types";
 ///弹窗参数
 type CreateOrUpdateParams = {
   role?: RoleApi.Role | Record<string, any>
@@ -15,13 +14,13 @@ type CreateOrUpdateParams = {
 
 ///修改或者新建role
 const CreateOrUpdate: React.FC<CreateOrUpdateParams> = (props) => {
-  const onFinish = async (values: Role) => {
+  const onFinish = async (values: RoleApi.Role) => {
     values.id = props.role?.id
     await SaveOrUpdateRole(values)
     return true;
   }
   return <>
-    <ModalForm<Role> initialValues={props.role} title={props.title ?? "新建权限"} trigger={props.trigger ?? <Button type="primary">新建权限</Button>} width={400}
+    <ModalForm<RoleApi.Role> initialValues={props.role} title={props.title ?? "新建权限"} trigger={props.trigger ?? <Button type="primary">新建权限</Button>} width={400}
                              onFinish={onFinish} onFinishFailed={props.onFinish}>
       <ProFormText name={"name"} label={"名称"} required />
       <ProFormTextArea name={"note"} label={"备注"} />
@@ -45,7 +44,7 @@ export default function Page() {
   return (
     <PageContainer>
       <Card title={<CreateOrUpdate />}>
-        <ApiTable<Role> api={params => GetRoleListApiByPage(params)} columns={[
+        <ApiTable<RoleApi.Role> api={params => GetRoleListApiByPage(params)} columns={[
           {
             key: "id",
             dataIndex: "id",
