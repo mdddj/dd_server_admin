@@ -5,7 +5,7 @@
 import { RequestConfig } from "@@/plugin-request/request";
 import { getJwtToken, removeJwtToken } from "@/utils/cache";
 import { history } from "@@/core/history";
-import { message } from "antd";
+import { Modal, message, notification } from "antd";
 
 
 
@@ -51,12 +51,21 @@ export const request: RequestConfig = {
       }
     },
     errorThrower(res: ResponseStructure) {
-      console.log("....res:" + res);
       if (!res.success) {
         const error: any = new Error(res.message);
         error.name = "BizError";
         error.info = res;
-        throw error;
+        
+        switch(res.type) {
+          case ResultDialogType.toast:
+            message.error(res.message)
+            break;
+          case ResultDialogType.dialog:
+            Modal.error({content: res.message,title:"操作失败"})
+            break
+          case ResultDialogType.notice:
+          case ResultDialogType.errorPage:
+        }
       }
     }
   }
@@ -66,5 +75,10 @@ interface ResponseStructure {
   state: number,
   data: any,
   message: string,
-  success: boolean
+  success: boolean,
+  type: ResultDialogType
+}
+
+enum  ResultDialogType {
+  toast, dialog, notice, errorPage
 }

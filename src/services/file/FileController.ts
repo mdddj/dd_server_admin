@@ -9,3 +9,15 @@ export async function GetAllFile(params: any) : Promise<Result<CoverToPageData<F
         params
     })
 }
+
+/**
+ * 删除某个文件
+ * @param id fileInfo id
+ * @constructor
+ */
+export async function DeleteFileById(id: number) {
+    return request("/api/storage/delete",{
+        method: 'DELETE',
+        params: {id}
+    })
+}

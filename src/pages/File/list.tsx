@@ -1,9 +1,8 @@
 import React from 'react';
-import styles from './list.less';
 import { PageContainer, ProList } from '@ant-design/pro-components';
-import { Button, Card } from 'antd';
+import { Button, Card, Popconfirm, Space, message } from 'antd';
 import { FileInfo } from '@/services/file/type';
-import { GetAllFile } from '@/services/file/FileController';
+import { DeleteFileById, GetAllFile } from '@/services/file/FileController';
 
 export default function Page() {
   return (
@@ -25,6 +24,23 @@ export default function Page() {
           },
           avatar: {
             dataIndex: 'url'
+          },
+          content:{
+            dataIndex: "absolutePath"
+          },
+          actions: {
+            render(dom, entity, index, action, schema) {
+              return <Space>
+                <Popconfirm title={'确定删除吗？'} onConfirm={ async ()=>{
+                  let hide = message.loading("正在删除")
+                  await DeleteFileById(entity.id)
+                  hide()
+                  action?.reload()
+                }} >
+                  <a>删除</a>
+                </Popconfirm>
+              </Space>
+            },
           }
         }} headerTitle="列表" toolBarRender={()=>{
           return [
@@ -33,7 +49,7 @@ export default function Page() {
             </Button>
           ]
         }} >
-          
+        
         </ProList>
       </Card>
     </PageContainer>
