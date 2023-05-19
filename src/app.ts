@@ -41,8 +41,16 @@ export const request: RequestConfig = {
       if (error.name === "BizError") {
         const errorInfo: ResponseStructure | undefined = error.info;
         if (errorInfo) {
-          message.error(errorInfo.message).then(() => {
-          });
+          switch(errorInfo.type) {
+            case ResultDialogType.toast:
+              message.error(errorInfo.message)
+              break;
+            case ResultDialogType.dialog:
+              Modal.error({content: errorInfo.message,title:"操作失败"})
+              break
+            case ResultDialogType.notice:
+            case ResultDialogType.errorPage:
+          }
         }
         if (errorInfo?.state === 401 || errorInfo?.state === 302) {
           location.href = "/login?m=" + errorInfo?.message ?? "";
@@ -55,17 +63,7 @@ export const request: RequestConfig = {
         const error: any = new Error(res.message);
         error.name = "BizError";
         error.info = res;
-        
-        switch(res.type) {
-          case ResultDialogType.toast:
-            message.error(res.message)
-            break;
-          case ResultDialogType.dialog:
-            Modal.error({content: res.message,title:"操作失败"})
-            break
-          case ResultDialogType.notice:
-          case ResultDialogType.errorPage:
-        }
+        throw error
       }
     }
   }
