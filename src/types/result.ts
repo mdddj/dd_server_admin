@@ -3,6 +3,7 @@ export interface Result<T> {
     message: string;
     state: number;
     success: boolean;
+    type: string
 }
 
 export interface CoverToPageData<T> {

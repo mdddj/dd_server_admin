@@ -5,3 +5,21 @@ export interface BlogCategory {
     logo:       string;
     name:       string;
 }
+
+export interface Blog {
+    aliasString: string;
+    author:      string;
+    category:    BlogCategory;
+    content:     string;
+    createTime:  string;
+    dateString:  string;
+    id:          number|undefined;
+    tags:        BlogTag[];
+    thumbnail:   string;
+    title:       string;
+}
+
+export interface BlogTag {
+    id:   number;
+    name: string;
+}

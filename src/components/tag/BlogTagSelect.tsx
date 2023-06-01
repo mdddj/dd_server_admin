@@ -3,10 +3,12 @@ import { PlusOutlined } from '@ant-design/icons';
 import type { InputRef } from 'antd';
 import { Input, Tag, theme } from 'antd';
 import { TweenOneGroup } from 'rc-tween-one';
-
-const TagSelect: React.FC = () => {
+type TagSelectProps = {
+  tags: string[],
+  onChange: (tags:string[]) =>void
+}
+const TagSelect: React.FC<TagSelectProps> = ({onChange,tags}) => {
   const { token } = theme.useToken();
-  const [tags, setTags] = useState<string[]>([]);
   const [inputVisible, setInputVisible] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const inputRef = useRef<InputRef>(null);
@@ -20,7 +22,7 @@ const TagSelect: React.FC = () => {
   const handleClose = (removedTag: string) => {
     const newTags = tags.filter((tag) => tag !== removedTag);
     console.log(newTags);
-    setTags(newTags);
+    onChange(newTags);
   };
 
   const showInput = () => {
@@ -33,7 +35,7 @@ const TagSelect: React.FC = () => {
 
   const handleInputConfirm = () => {
     if (inputValue && tags.indexOf(inputValue) === -1) {
-      setTags([...tags, inputValue]);
+      onChange([...tags, inputValue]);
     }
     setInputVisible(false);
     setInputValue('');
