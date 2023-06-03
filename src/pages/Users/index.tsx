@@ -128,16 +128,30 @@ export default function Page() {
           {
             key: "status",
             title: "账号状态",
-            dataIndex: "status"
+            dataIndex: "status",
+            render: (dom, entity) => {
+              switch (entity.status) {
+                case 0:
+                  return <Tag color={'success'}>正常使用</Tag>
+                case 1:
+                  return <Tag>账户密码失效</Tag>
+                case 2:
+                  return <Tag>账号被锁定</Tag>
+                case 3:
+                  return <Tag>账户密码被锁定</Tag>
+                case 4:
+                  return <Tag>等待验证邮箱</Tag>
+              }
+              return <>未知{entity.status}</>
+            }
           },
           {
             title: "企业",
             key: "enterprise",
             dataIndex: "enterprise",
-            render: (dom, entity) => {
+            render: (dom, entity,index,action) => {
               return <Space>
-                {!entity.enterprise && <UpdateFromModal<{ enterpriseId: number }> id={entity.id} onSuccess={() => {
-                }} dom={<ProFormSelect request={async () => {
+                {!entity.enterprise && <UpdateFromModal<{ enterpriseId: number }> id={entity.id} onSuccess={() => action?.reload()} dom={<ProFormSelect request={async () => {
                   let r = await ApiEnterpriseFindAll();
                   return [...r.data.map(value => {
                     return {

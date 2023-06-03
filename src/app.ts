@@ -2,6 +2,7 @@ import { RequestConfig } from "@@/plugin-request/request";
 import { getJwtToken, removeJwtToken } from "@/utils/cache";
 import { history } from "@@/core/history";
 import { Modal, message } from "antd";
+import { HOST_NAME } from "@/constants";
 
 
 interface ResponseStructure {
@@ -37,8 +38,9 @@ export function onRouteChange({ location }: any) {
 }
 
 let token = getJwtToken();
+
 export const request: RequestConfig = {
-  baseURL: 'http://localhost',
+  baseURL: HOST_NAME,
   headers: token !== null ? {
     'Authorization' : token
   } : {},

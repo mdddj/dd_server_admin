@@ -99,6 +99,17 @@ export default defineConfig({
                     component: "./Blog/add"
                 }
             ]
+        },
+        {
+            name: "资源管理",
+            path: "/resource",
+            routes: [
+                {
+                    name: "分类列表",
+                    path: "/resource/category",
+                    component: "./Resource/CategoryList"
+                },
+            ]
         }
     ],
     npmClient: 'pnpm',
