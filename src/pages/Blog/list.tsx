@@ -4,6 +4,7 @@ import { Avatar, Button, Card, Space, Tag } from "antd";
 import { Blog } from "@/types/blog";
 import { GetBlogList } from "@/services/blog/BlogController";
 import { useNavigate } from "@@/exports";
+import { FileSelectorComponent } from "@/components/file/FileSelectorComponent";
 
 const Page:React.FC = () => {
 

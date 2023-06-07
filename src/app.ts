@@ -47,6 +47,11 @@ export const request: RequestConfig = {
   errorConfig: {
     errorHandler(error: any, opts: any) {
       if (opts?.skipErrorHandler) throw error;
+      if(error.response.status === 401){
+        location.href = "/login"
+        removeJwtToken()
+        return
+      }
       if (error.name === "BizError") {
         const errorInfo: ResponseStructure | undefined = error.info;
         if (errorInfo) {
@@ -60,10 +65,6 @@ export const request: RequestConfig = {
             case ResultDialogType.notice:
             case ResultDialogType.errorPage:
           }
-        }
-        if (errorInfo?.state === 401 || errorInfo?.state === 302) {
-          location.href = "/login?m=" + errorInfo?.message ?? "";
-          removeJwtToken();
         }
       }
     },

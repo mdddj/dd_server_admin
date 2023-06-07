@@ -6,7 +6,7 @@ import React, { useState, useEffect } from "react";
 import { Blog, BlogCategory } from "@/types/blog";
 import { GetBlogById, GetBlogCategorys, PushOneBlog } from "@/services/blog/BlogController";
 import { useSearchParams } from "@@/exports";
-import FileSelectorTrigger from "@/components/file/FileSelectorComponent";
+import { OpenFileSelectionModal } from "@/components/file/MyFileSelection";
 
 const Page: React.FC = () => {
 
@@ -105,14 +105,15 @@ const Page: React.FC = () => {
             <Input />
           </Form.Item>
           <Form.Item label={"主图"} name={"thumbnail"}>
-            <Input />
+            <Input  suffix={<Button onClick={()=>{
+              OpenFileSelectionModal()
+            }}>资源选择</Button>} />
           </Form.Item>
           <Form.Item label={"标签"} name={"tags"}>
             <TagSelect tags={tags} onChange={setTags} />
           </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit">发布博客</Button>
-            <FileSelectorTrigger  />
           </Form.Item>
         </Form>
       </Card>

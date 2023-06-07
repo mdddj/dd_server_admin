@@ -7,10 +7,10 @@ import CreateOrUpdateCategory from "@/pages/Resource/CreateOrUpdateCategory";
 
 export default function Page() {
   return (
-    <PageContainer title={'分类列表'}>
-     <Card extra={[
-       <CreateOrUpdateCategory key={'create'} />
-     ]}>
+    <PageContainer title={'分类列表'} extra={[
+      <CreateOrUpdateCategory key={'create'} />
+    ]}>
+     <Card>
         <ProTable<ResourcesCategory> columns={[
           {
             "key": "id",

@@ -1,3 +1,4 @@
+
 export interface Result<T> {
     data: T;
     message: string;
@@ -23,4 +24,13 @@ export interface Page {
 export interface PageModel {
     page: number,
     pageSize: number
+}
+
+
+export function GetRequestData<T>(result : Result<CoverToPageData<T>>): any {
+    return {
+        success: result.success,
+        data: result.data.list,
+        total: result.data.page.total
+    }
 }

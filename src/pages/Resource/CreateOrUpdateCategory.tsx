@@ -11,6 +11,7 @@ export default function CreateOrUpdateCategory() {
       return result.success
     }} >
      <ProFormText name={'name'} label={"名称"} />
+      <ProFormText name={'type'} label={"分组类型"} />
    </ModalForm>
   );
 }

@@ -3,7 +3,11 @@ import { request } from "@umijs/max";
 import { FileInfo } from "./type";
 
 
-///获取全部文件
+/**
+ * 获取全部文件
+ * @param params 分页参数
+ * @constructor
+ */
 export async function GetAllFile(params: any) : Promise<Result<CoverToPageData<FileInfo>>> { 
     return request<Result<CoverToPageData<FileInfo>>>("/api/file/list",{
         params
