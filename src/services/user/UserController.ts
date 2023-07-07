@@ -1,16 +1,21 @@
-import { request } from "@umijs/max";
-import { User } from "@/types/user";
-import { CoverToPageData, Result } from "@/types/result";
+import { LoginType } from '@/pages/Login';
+import { CoverToPageData, Result } from '@/types/result';
+import { User } from '@/types/user';
+import { request } from '@umijs/max';
 
 /**
  * 登录接口
  * @param data
  * @constructor
  */
-export async function ApiLogin(data: any) {
-  return request("/api/user-public/login", {
-    method: "POST",
-    data
+export async function ApiLogin(data: any, loginType: LoginType) {
+  let url =
+    loginType === 'email'
+      ? '/api/user-public/login-by-email'
+      : '/api/user-public/login';
+  return request(url, {
+    method: 'POST',
+    data,
   });
 }
 
@@ -19,7 +24,7 @@ export async function ApiLogin(data: any) {
  * @constructor
  */
 export async function ApiGetCurrentUser(): Promise<Result<User>> {
-  return request("/api/get-user-by-token");
+  return request('/api/get-user-by-token');
 }
 
 /**
@@ -27,9 +32,11 @@ export async function ApiGetCurrentUser(): Promise<Result<User>> {
  * @param pageParam
  * @constructor
  */
-export async function ApiQueryUserList(pageParam: any): Promise<Result<CoverToPageData<User>>> {
-  return request("/api/user/list", {
-    params: pageParam
+export async function ApiQueryUserList(
+  pageParam: any,
+): Promise<Result<CoverToPageData<User>>> {
+  return request('/api/user/list', {
+    params: pageParam,
   });
 }
 
@@ -39,9 +46,9 @@ export async function ApiQueryUserList(pageParam: any): Promise<Result<CoverToPa
  * @constructor
  */
 export async function ApiUpdateUserInfo(params: any) {
-  return request<Result<User>>("/api/user/update", {
-    method: "POST",
-    data: params
+  return request<Result<User>>('/api/user/update', {
+    method: 'POST',
+    data: params,
   });
 }
 
@@ -50,10 +57,13 @@ export async function ApiUpdateUserInfo(params: any) {
  * @param params
  * @constructor
  */
-export async function ApiUpdateUserPassword(params: { currentPass: string, rePassword: string }) {
-  return request<Result<string>>("/api/auth/user-update-pass", {
-    method: "POST",
-    data: params
+export async function ApiUpdateUserPassword(params: {
+  currentPass: string;
+  rePassword: string;
+}) {
+  return request<Result<string>>('/api/auth/user-update-pass', {
+    method: 'POST',
+    data: params,
   });
 }
 
@@ -62,9 +72,24 @@ export async function ApiUpdateUserPassword(params: { currentPass: string, rePas
  * @param params
  * @constructor
  */
-export async function ApiDeleteUser(params: {id: number}) {
-  return request("/api/auth/deleteUser",{
+export async function ApiDeleteUser(params: { id: number }) {
+  return request('/api/auth/deleteUser', {
     method: 'DELETE',
-    params
-  })
+    params,
+  });
+}
+
+///是否注册过管理员账号
+export async function ApiIsRegisterAdminAccount() {
+  return request<Result<boolean>>('/api/public/has-admin', {
+    method: 'GET',
+  });
+}
+
+///创建初始管理员账号
+export async function ApiCreateAdminAccount(params: any) {
+  return request<Result<User>>('/api/public/create-admin', {
+    method: 'POST',
+    data: params,
+  });
 }

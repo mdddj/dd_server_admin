@@ -1,3 +1,21 @@
 # README
 
-`@umijs/max` 模板项目，更多功能参考 [Umi Max 简介](https://umijs.org/docs/max/introduce)
+# 典典的小卖部后台管理平台
+
+使用`react,umi,antd`前后端分离的方式编写
+
+# 安装依赖
+```bash
+pnpm install
+```
+
+# 运行
+```bash
+pnpm dev
+```
+
+# 修改为线上接口
+
+```js
+修改src/constants/index.ts里面的HOST_NAME变量
+```

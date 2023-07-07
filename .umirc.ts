@@ -37,6 +37,12 @@ export default defineConfig({
             layout: false
         },
         {
+            name: "初始化管理员账号",
+            path: '/init',
+            component: './Login/CreateAdminPage',
+            layout: false
+        },
+        {
             name: '用户管理',
             path: '/users',
             component: './Users'
