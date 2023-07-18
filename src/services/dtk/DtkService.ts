@@ -1,4 +1,8 @@
-import { DTKDetail, SetDefaultDtkAccountParam } from '@/models/tdk';
+import {
+  DTKDetail,
+  DtkVerifyParam,
+  SetDefaultDtkAccountParam,
+} from '@/models/tdk';
 import { JpaPage, Result } from '@/types/result';
 import { request } from '@umijs/max';
 
@@ -45,5 +49,14 @@ export async function MyDtkServiceGetAllApi(
   return request('/api/v1/dtk/detail/all', {
     method: 'GET',
     params,
+  });
+}
+
+export async function MyDtkServiceVerifyDtkAccountApi(
+  param: DtkVerifyParam,
+): Promise<Result<boolean>> {
+  return request('/api/v1/dtk/detail/verify', {
+    method: 'POST',
+    data: param,
   });
 }

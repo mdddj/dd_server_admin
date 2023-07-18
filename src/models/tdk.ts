@@ -21,3 +21,17 @@ export interface SetDefaultDtkAccountParam {
    */
   id: number;
 }
+
+/**
+ * 验证大淘客账号是否可用参数
+ */
+export interface DtkVerifyParam {
+  /**
+   * 大淘客appKey
+   */
+  appKey: string;
+  /**
+   * 大淘客appSecret
+   */
+  appSecret: string;
+}

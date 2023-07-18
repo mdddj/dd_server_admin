@@ -72,6 +72,7 @@ export const request: RequestConfig = {
   ],
   responseInterceptors: [
     (response: AxiosResponse) => {
+      message.destroy();
       if (response.status === 200) {
         let data = response.data as Result<any>;
         if (data.type === ToastType.FinnalToast) {
