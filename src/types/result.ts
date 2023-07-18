@@ -38,6 +38,35 @@ export enum ToastType {
   None = 'None',
   Notice = 'Notice',
   Toast = 'Toast',
-  FinnalToast = 'FinnalToast',
-  FinnalDialog = 'FinnalDialog',
+  FinnalToast = 'FinalToast',
+  FinnalDialog = 'FinalDialog',
+}
+
+export interface JpaPage<T> {
+  content: T[];
+  empty: boolean;
+  first: boolean;
+  last: boolean;
+  number: number;
+  numberOfElements: number;
+  pageable: JpaPageable;
+  size: number;
+  sort: JpaSort;
+  totalElements: number;
+  totalPages: number;
+}
+
+export interface JpaPageable {
+  offset: number;
+  pageNumber: number;
+  pageSize: number;
+  paged: boolean;
+  sort: JpaSort;
+  unpaged: boolean;
+}
+
+export interface JpaSort {
+  empty: boolean;
+  sorted: boolean;
+  unsorted: boolean;
 }

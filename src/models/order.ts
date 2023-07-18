@@ -1,28 +1,73 @@
 export interface UserOrder {
-  id?: number;
-  zheCode?: string;
-  zheAccount?: string;
-  zheAppKey?: string;
-  zheSid?: string;
-  zheIsJieSuan?: string;
-  zheJieSuanTime?: string;
-  zheJieSuanProfit?: string;
-  zheOrderId?: string;
-  zhePayTime?: string;
-  zhePayPrice?: string;
-  zheProfit?: string;
-  zheSmsTitle?: string;
-  zheRefundPrice?: string;
-  zheRefundTime?: string;
-  zheStatus?: string;
-  zheUpdateTime?: string;
-  zheType?: string;
-  zheSidZtk?: string;
-  zheCustomerIdZtk?: string;
-  zhePlatformZtk?: string;
-  zheActId?: string;
-  zheSanPingTai?: string;
-  zheSanPingTaiId?: string;
+  adzoneName: string;
+  adzoneid: null;
+  alimamaRate: string;
+  alimamaShareFee: string;
+  alipayTotalPrice: string;
+  clickTime: Date;
+  depositPrice: string;
+  flowSource: string;
+  id: number;
+  incomeRate: string;
+  itemCategoryName: string;
+  itemImg: string;
+  itemLink: string;
+  itemNum: number;
+  itemPrice: string;
+  itemTitle: string;
+  itemid: string;
+  orderType: string;
+  pubShareFee: string;
+  pubSharePreFee: string;
+  pubShareRate: string;
+  pubid: number;
+  refundTag: number;
+  sellerNick: string;
+  sellerShopTitle: string;
+  siteName: string;
+  siteid: number;
+  subsidyFee: string;
+  subsidyRate: string;
+  subsidyType: string;
+  tbDepositTime: string;
+  tbPaidTime: Date;
+  terminalType: string;
+  tkCommissionFeeForMediaPlatform: string;
+  tkCommissionPreFeeForMediaPlatform: string;
+  tkCommissionRateForMediaPlatform: string;
+  tkCreateTime: Date;
+  tkDepositTime: string;
+  tkOrderRole: number;
+  tkPaidTime: Date;
+  tkStatus: number;
+  tkTotalRate: string;
+  totalCommissionFee: string;
+  totalCommissionRate: string;
+  tradeParentid: string;
+  tradeid: string;
+  zheAccount: string;
+  zheActId: string;
+  zheAppKey: string;
+  zheCode: string;
+  zheCustomerIdZtk: string;
+  zheIsJieSuan: string;
+  zheJieSuanProfit: string;
+  zheJieSuanTime: string;
+  zheOrderId: string;
+  zhePayPrice: string;
+  zhePayTime: string;
+  zhePlatformZtk: string;
+  zheProfit: string;
+  zheRefundPrice: string;
+  zheRefundTime: string;
+  zheSanPingTai: string;
+  zheSanPingTaiId: string;
+  zheSid: string;
+  zheSidZtk: string;
+  zheSmsTitle: string;
+  zheStatus: string;
+  zheType: string;
+  zheUpdateTime: string;
 }
 
 export interface DtkOrderSelectParam {
@@ -165,4 +210,150 @@ export enum TkStatus {
   '订单结算' = 3,
   '订单失效' = 13,
   '订单成功' = 14,
+}
+
+export interface OrderSelectParam {
+  adzoneid?: number;
+  adzoneName?: string;
+  alimamaRate?: string;
+  alimamaShareFee?: string;
+  alipayTotalPrice?: string;
+  clickTime?: string;
+  current?: number;
+  depositPrice?: string;
+  flowSource?: string;
+  /**
+   * 订单ID
+   */
+  id?: number;
+  incomeRate?: string;
+  itemCategoryName?: string;
+  itemid?: string;
+  itemImg?: string;
+  itemLink?: string;
+  itemNum?: number;
+  itemPrice?: string;
+  itemTitle?: string;
+  orderType?: string;
+  page?: number;
+  pageSize: number;
+  pubid?: number;
+  pubShareFee?: string;
+  pubSharePreFee?: string;
+  pubShareRate?: string;
+  refundTag?: number;
+  remove?: number;
+  sellerNick?: string;
+  sellerShopTitle?: string;
+  siteid?: number;
+  siteName?: string;
+  subsidyFee?: string;
+  subsidyRate?: string;
+  subsidyType?: string;
+  tbDepositTime?: string;
+  tbPaidTime?: string;
+  terminalType?: string;
+  tkCommissionFeeForMediaPlatform?: string;
+  tkCommissionPreFeeForMediaPlatform?: string;
+  tkCommissionRateForMediaPlatform?: string;
+  tkCreateTime?: string;
+  tkDepositTime?: string;
+  tkOrderRole?: number;
+  tkPaidTime?: string;
+  tkStatus?: number;
+  tkTotalRate?: string;
+  totalCommissionFee?: string;
+  totalCommissionRate?: string;
+  tradeid?: string;
+  tradeParentid?: string;
+  user?: string;
+  /**
+   * 折淘客账号
+   */
+  zheAccount?: string;
+  /**
+   * 活动id
+   */
+  zheActId?: string;
+  zheAppKey?: string;
+  /**
+   * 折淘客自动增长列
+   */
+  zheCode?: string;
+  /**
+   * 推广者自定义编号
+   */
+  zheCustomerIdZtk?: string;
+  /**
+   * 折淘客是否结算，0未结算，1已结算
+   */
+  zheIsJieSuan?: string;
+  /**
+   * 折淘客结算金额
+   */
+  zheJieSuanProfit?: string;
+  /**
+   * 折淘客结算时间
+   */
+  zheJieSuanTime?: string;
+  /**
+   * 订单编号
+   */
+  zheOrderId?: string;
+  /**
+   * 订单实际支付金额
+   */
+  zhePayPrice?: string;
+  /**
+   * 订单支付时间
+   */
+  zhePayTime?: string;
+  /**
+   * 推广者平台类型，默认zhetaoke
+   */
+  zhePlatformZtk?: string;
+  /**
+   * 预估佣金
+   */
+  zheProfit?: string;
+  /**
+   * 退款金额
+   */
+  zheRefundPrice?: string;
+  /**
+   * 退款时间
+   */
+  zheRefundTime?: string;
+  /**
+   * 订单所属平台,考拉、美团、苏宁、淘宝、京东、拼多多、唯品会、饿了么等
+   */
+  zheSanPingTai?: string;
+  /**
+   * 订单所属平台id，1美团、2考拉、3苏宁、4淘宝、5京东、6拼多多、7唯品会、8饿了么
+   */
+  zheSanPingTaiId?: string;
+  /**
+   * 原始推广位sid
+   */
+  zheSid?: string;
+  /**
+   * 折淘客授权sid
+   */
+  zheSidZtk?: string;
+  /**
+   * 订单标题
+   */
+  zheSmsTitle?: string;
+  /**
+   * 订单状态，1已付款，8已完成，9已退款或风控
+   */
+  zheStatus?: string;
+  /**
+   * 订单类型
+   */
+  zheType?: string;
+  /**
+   * 数据最后更新时间
+   */
+  zheUpdateTime?: string;
 }

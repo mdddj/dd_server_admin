@@ -7,7 +7,7 @@ export default defineConfig({
   initialState: {},
   request: {},
   layout: {
-    title: '皮里斯AI',
+    title: '典典的小卖部',
   },
   routes: [
     {
@@ -19,16 +19,6 @@ export default defineConfig({
       name: '首页',
       path: '/home',
       component: './Home',
-    },
-    {
-      name: '权限演示',
-      path: '/access',
-      component: './Access',
-    },
-    {
-      name: ' CRUD 示例',
-      path: '/table',
-      component: './Table',
     },
     {
       name: '登录',
@@ -122,12 +112,12 @@ export default defineConfig({
       path: '/order',
       routes: [
         {
-          name: '大淘客订单',
+          name: '订单列表',
           path: '/order/dataoke',
           component: './Order/DataokeOrder',
         },
         {
-          name: '折淘客订单',
+          name: '折淘客订单查询',
           path: '/order/zhetaoke',
           component: './Order/ZheTaokeOrder',
         },
