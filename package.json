@@ -2,7 +2,7 @@
   "private": true,
   "author": "梁典典 <413153189@qq.com>",
   "scripts": {
-    "dev": "max dev",
+    "dev": "ERROR_OVERLAY=none max dev ",
     "build": "max build",
     "format": "prettier --cache --write .",
     "prepare": "husky install",
@@ -16,6 +16,7 @@
     "@uiw/react-md-editor": "^3.23.3",
     "@umijs/max": "^4.0.72",
     "antd": "^5.6.4",
+    "dayjs": "^1.11.9",
     "rc-tween-one": "^3.0.6",
     "react-use": "^17.4.0",
     "zustand": "^4.3.9"

@@ -3,25 +3,28 @@ import { getJwtToken, removeJwtToken } from '@/utils/cache';
 import { history } from '@@/core/history';
 import {
   AxiosError,
+  AxiosResponse,
   RequestConfig,
   RequestError,
   RequestOptions,
 } from '@@/plugin-request/request';
 import { Modal, message } from 'antd';
+import dayjs from 'dayjs';
+import 'dayjs/locale/zh-cn';
 
+import updateLocale from 'dayjs/plugin/updateLocale';
+import { Result, ToastType } from './types/result';
+
+dayjs.extend(updateLocale);
+dayjs.updateLocale('zh-cn', {
+  weekStart: 0,
+});
 interface ResponseStructure {
   state: number;
   data: any;
   message: string;
   success: boolean;
-  type: ResultDialogType;
-}
-
-enum ResultDialogType {
-  toast,
-  dialog,
-  notice,
-  errorPage,
+  type: ToastType;
 }
 
 class ApiError extends Error {
@@ -67,6 +70,21 @@ export const request: RequestConfig = {
       return config;
     },
   ],
+  responseInterceptors: [
+    (response: AxiosResponse) => {
+      if (response.status === 200) {
+        let data = response.data as Result<any>;
+        if (data.type === ToastType.FinnalToast) {
+          message.success(data.message);
+        } else if (data.type === ToastType.FinnalDialog) {
+          Modal.success({
+            content: data.message,
+          });
+        }
+      }
+      return response;
+    },
+  ],
   errorConfig: {
     errorHandler(error: RequestError, opts: RequestOptions) {
       if (opts?.skipErrorHandler) throw error;
@@ -83,14 +101,14 @@ export const request: RequestConfig = {
           const errorInfo: ResponseStructure = error.info;
           if (errorInfo) {
             switch (errorInfo.type) {
-              case ResultDialogType.toast:
+              case ToastType.Toast:
                 message.error(errorInfo.message);
                 break;
-              case ResultDialogType.dialog:
+              case ToastType.Dialog:
                 Modal.error({ content: errorInfo.message, title: '操作失败' });
                 break;
-              case ResultDialogType.notice:
-              case ResultDialogType.errorPage:
+              case ToastType.None:
+              case ToastType.Notice:
             }
           }
         }

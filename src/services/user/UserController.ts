@@ -93,3 +93,8 @@ export async function ApiCreateAdminAccount(params: any) {
     data: params,
   });
 }
+
+///查找全部用户
+export async function ApiUserFindAll(): Promise<Result<User[]>> {
+  return request<Result<User[]>>('/api/user/all-user');
+}
