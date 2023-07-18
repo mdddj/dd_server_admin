@@ -128,6 +128,17 @@ export default defineConfig({
         },
       ],
     },
+    {
+      name: '大淘客管理',
+      path: '/dtk',
+      routes: [
+        {
+          name: '账号列表',
+          path: '/dtk/accounts',
+          component: './Dtk/Account',
+        },
+      ],
+    },
   ],
   npmClient: 'pnpm',
 });
