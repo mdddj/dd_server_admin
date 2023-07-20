@@ -8,17 +8,20 @@ export default defineConfig({
   request: {},
   layout: {
     title: '典典的小卖部',
+
   },
   routes: [
     {
       path: '/',
       redirect: '/home',
       access: 'canSeeAdmin',
+
     },
     {
       name: '首页',
       path: '/home',
       component: './Home',
+      icon: 'HomeOutlined'
     },
     {
       name: '登录',
@@ -36,10 +39,12 @@ export default defineConfig({
       name: '用户管理',
       path: '/users',
       component: './Users',
+      icon: 'UserOutlined'
     },
     {
       name: '企业管理',
       path: '/enterprise',
+      icon: 'ClusterOutlined',
       routes: [
         {
           name: '企业列表',
@@ -56,6 +61,7 @@ export default defineConfig({
     {
       name: '权限管理',
       path: '/role',
+      icon: 'SafetyOutlined',
       routes: [
         {
           name: '权限列表',
@@ -67,6 +73,7 @@ export default defineConfig({
     {
       name: '文件管理',
       path: '/file',
+      icon: 'FileOutlined',
       routes: [
         {
           name: '上传文件',
@@ -83,6 +90,7 @@ export default defineConfig({
     {
       name: '文章管理',
       path: '/blog',
+      icon: 'CloudOutlined',
       routes: [
         {
           name: '文章列表',
@@ -99,6 +107,7 @@ export default defineConfig({
     {
       name: '资源管理',
       path: '/resource',
+      icon: 'ProfileOutlined',
       routes: [
         {
           name: '分类列表',
@@ -110,6 +119,7 @@ export default defineConfig({
     {
       name: '订单管理',
       path: '/order',
+      icon: 'ShoppingOutlined',
       routes: [
         {
           name: '订单列表',
@@ -131,6 +141,7 @@ export default defineConfig({
     {
       name: '大淘客管理',
       path: '/dtk',
+      icon: 'IdcardOutlined',
       routes: [
         {
           name: '账号列表',

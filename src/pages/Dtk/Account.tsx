@@ -1,12 +1,12 @@
-import DefaultDtkAccountWidegt from '@/components/dtk/DefaultDtkAccount';
+import DefaultDtsAccountWidget from '@/components/dtk/DefaultDtkAccount';
 import DesensitizationTextWidget from '@/components/widget/DesensitizationText';
 import { DTKDetail } from '@/models/tdk';
 import {
   MyDtkServiceAddApi,
-  MyDtkServiceChangeDefaultAccountApi,
+  MyDtkServiceChangeDefaultAccountApi, MyDtkServiceDeleteApi,
   MyDtkServiceGetAllApi,
-  MyDtkServiceVerifyDtkAccountApi,
-} from '@/services/dtk/DtkService';
+  MyDtkServiceVerifyDtkAccountApi
+} from "@/services/dtk/DtkService";
 import {
   ModalForm,
   PageContainer,
@@ -16,7 +16,7 @@ import {
   ProFormTextArea,
   ProTable,
 } from '@ant-design/pro-components';
-import { Button, Card, Checkbox, Image, Typography, message } from 'antd';
+import { Button, Card, Checkbox, Image, Typography, message, Space, Form, Popconfirm } from "antd";
 import React, { useRef, useState } from 'react';
 
 type DtkDetailFormProp = {
@@ -29,8 +29,12 @@ const DtkDetailForm: React.FC<DtkDetailFormProp> = ({
   updateModel,
   onSuccess,
 }) => {
-  const formRef = useRef<ProFormInstance>();
+  const formRef = useRef<ProFormInstance<DTKDetail>>();
+  const [form] = Form.useForm()
   const [verify, setVerify] = useState(false);
+  const appKey = Form.useWatch("appKey",form)
+  const appSecret = Form.useWatch("appSecret",form)
+
   return (
     <ModalForm<DTKDetail>
       title={updateModel ? '修改信息' : '添加大淘客账号'}
@@ -39,7 +43,7 @@ const DtkDetailForm: React.FC<DtkDetailFormProp> = ({
           type={updateModel ? 'default' : 'primary'}
           size={updateModel ? 'small' : 'middle'}
         >
-          {updateModel ? '修改' : '添加'}
+          {updateModel ? '修改' : '添加大淘客账号'}
         </Button>
       }
       onFinish={async (values: DTKDetail) => {
@@ -47,7 +51,6 @@ const DtkDetailForm: React.FC<DtkDetailFormProp> = ({
           values.id = updateModel.id;
         }
         message.loading('正在验证账号信息');
-
         let r = await MyDtkServiceVerifyDtkAccountApi({
           appKey: values.appKey,
           appSecret: values.appSecret,
@@ -65,13 +68,12 @@ const DtkDetailForm: React.FC<DtkDetailFormProp> = ({
         }
         return false;
       }}
+
+      form={form}
       formRef={formRef}
       initialValues={updateModel}
-      preserve={false}
       submitter={{
-        render(props, dom) {
-          let appKey = props.form?.getFieldValue('appKey');
-          let appSecret = props.form?.getFieldValue('appSecret');
+        render(_, dom) {
           return [
             <Button
               disabled={
@@ -81,15 +83,19 @@ const DtkDetailForm: React.FC<DtkDetailFormProp> = ({
               loading={verify}
               onClick={async () => {
                 if (appKey && appSecret) {
-                  message.loading('正在验证');
-                  setVerify(true);
-                  let r = await MyDtkServiceVerifyDtkAccountApi({
-                    appKey,
-                    appSecret,
-                  });
-                  setVerify(false);
-                  if (r.data) {
-                    message.success(r.message);
+                  try {
+                    message.loading('正在验证');
+                    setVerify(true);
+                    let r = await MyDtkServiceVerifyDtkAccountApi({
+                      appKey,
+                      appSecret,
+                    });
+                    setVerify(false);
+                    if (r.data) {
+                      message.success(r.message);
+                    }
+                  }catch (e) {
+                    setVerify(false)
                   }
                 }
               }}
@@ -100,6 +106,10 @@ const DtkDetailForm: React.FC<DtkDetailFormProp> = ({
           ];
         },
       }}
+      autoFocusFirstInput
+      modalProps={{
+        destroyOnClose: true
+      }}
     >
       <ProFormText
         name={'appKey'}
@@ -109,7 +119,12 @@ const DtkDetailForm: React.FC<DtkDetailFormProp> = ({
             required: true,
             message: '请输入appKey',
           },
+          {
+            len: 13,
+            message: '请输入正确的appKey'
+          }
         ]}
+
       />
 
       <ProFormText
@@ -127,17 +142,32 @@ const DtkDetailForm: React.FC<DtkDetailFormProp> = ({
       <ProFormTextArea name={'intro'} label={'介绍'} />
       <ProFormText name={'logo'} label={'图标'} />
       <ProFormCheckbox name={'selectDefault'}>
-        设置为默认应用 <DefaultDtkAccountWidegt />
+        设置为默认应用 <DefaultDtsAccountWidget />
       </ProFormCheckbox>
     </ModalForm>
   );
 };
 
 export default function Page() {
+
+
+  /**
+   * 验证大淘客账号是否可用
+   * @param account
+   */
+  const onCheckAccountStatus = async (account: DTKDetail) => {
+    message.loading("正在验证")
+    let result = await MyDtkServiceVerifyDtkAccountApi({ appKey: account.appKey, appSecret: account.appSecret })
+    if(result.success){
+      message.success(result.message)
+    }
+  }
+
   return (
-    <PageContainer title={'大淘客账号管理'}>
+    <PageContainer title={'大淘客账号管理'} extra={[
+      <DtkDetailForm key={'add'} />
+    ]}>
       <Card>
-        <DtkDetailForm />
         <ProTable<DTKDetail>
           rowKey={'id'}
           columns={[
@@ -162,6 +192,7 @@ export default function Page() {
               key: 'appSecret',
               dataIndex: 'appSecret',
               title: 'appSecret',
+              search: false,
               render: (_, e) => {
                 return (
                   <Typography.Paragraph copyable={{ text: e.appSecret }}>
@@ -179,6 +210,7 @@ export default function Page() {
               key: 'intro',
               dataIndex: 'intro',
               title: '介绍',
+              search: false,
             },
             {
               key: 'selectDefault',
@@ -212,8 +244,22 @@ export default function Page() {
             },
             {
               title: '操作',
+              search: false,
               render: (_, m, __, a) => (
-                <DtkDetailForm updateModel={m} onSuccess={() => a?.reload()} />
+                <Space>
+                  <DtkDetailForm updateModel={m} onSuccess={() => a?.reload()} />
+                  <Button onClick={()=>onCheckAccountStatus(m)} size={'small'}>验证</Button>
+                 <Popconfirm title={"确认删除吗?"} onConfirm={async ()=>{
+                   message.loading("正在删除")
+                   let result = await  MyDtkServiceDeleteApi(m.id!!)
+                   if(result.success){
+                     message.success(result.message)
+                     a?.reload()
+                   }
+                 }}>
+                   <Button size={'small'} >删除</Button>
+                 </Popconfirm>
+                </Space>
               ),
             },
           ]}

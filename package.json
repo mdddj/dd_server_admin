@@ -12,10 +12,10 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.1.4",
-    "@ant-design/pro-components": "^2.6.5",
+    "@ant-design/pro-components": "^2.6.7",
     "@uiw/react-md-editor": "^3.23.3",
     "@umijs/max": "^4.0.72",
-    "antd": "^5.7.0",
+    "antd": "^5.7.1",
     "dayjs": "^1.11.9",
     "rc-tween-one": "^3.0.6",
     "react-use": "^17.4.0",

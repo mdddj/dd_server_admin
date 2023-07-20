@@ -6,6 +6,7 @@ import { request } from '@umijs/max';
 /**
  * 登录接口
  * @param data
+ * @param loginType 登录类型
  * @constructor
  */
 export async function ApiLogin(data: any, loginType: LoginType) {

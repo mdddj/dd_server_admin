@@ -14,6 +14,10 @@ import 'dayjs/locale/zh-cn';
 
 import updateLocale from 'dayjs/plugin/updateLocale';
 import { Result, ToastType } from './types/result';
+import { RunTimeLayoutConfig } from "@@/plugin-layout/types";
+import GlobalAppBar from "@/components/GlobalAppBar";
+import { User } from "@/types/user";
+import { ApiGetCurrentUser } from "@/services/user/UserController";
 
 dayjs.extend(updateLocale);
 dayjs.updateLocale('zh-cn', {
@@ -36,16 +40,29 @@ class ApiError extends Error {
   }
 }
 
-export async function getInitialState(): Promise<{ name: string }> {
-  return { name: 'hello' };
+export interface AppInitialStateModel {
+  user?: User
 }
 
-export const layout = () => {
+export async function getInitialState(): Promise<AppInitialStateModel> {
+  let result = await ApiGetCurrentUser()
+  return { user: result.data };
+}
+
+
+export const layout: () => {
+  logo: string;
+  menu: { locale: boolean };
+  rightRender: (initialState: AppInitialStateModel) => JSX.Element
+} = () => {
   return {
     logo: 'https://img.alicdn.com/tfs/TB1YHEpwUT1gK0jSZFhXXaAtVXa-28-27.svg',
     menu: {
       locale: false,
     },
+    rightRender: (initialState : AppInitialStateModel) => {
+      return <GlobalAppBar initState={initialState}/>
+    }
   };
 };
 

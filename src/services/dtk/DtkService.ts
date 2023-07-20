@@ -52,6 +52,11 @@ export async function MyDtkServiceGetAllApi(
   });
 }
 
+/**
+ * 验证大淘客账号
+ * @param param
+ * @constructor
+ */
 export async function MyDtkServiceVerifyDtkAccountApi(
   param: DtkVerifyParam,
 ): Promise<Result<boolean>> {
@@ -59,4 +64,17 @@ export async function MyDtkServiceVerifyDtkAccountApi(
     method: 'POST',
     data: param,
   });
+}
+
+
+/**
+ * 删除大淘客账号
+ * @param id 主键
+ * @constructor
+ */
+export async function MyDtkServiceDeleteApi(id: number) : Promise<Result<boolean>> {
+  return request('/api/v1/dtk/detail/delete',{
+    method: 'DELETE',
+    params: {id}
+  })
 }
