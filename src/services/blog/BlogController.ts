@@ -1,5 +1,5 @@
 import { Blog, BlogCategory } from "@/types/blog";
-import { CoverToPageData, Result } from "@/types/result";
+import { CoverToPageData, JpaPage, Result } from "@/types/result";
 import { request } from "@umijs/max";
 
 /**
@@ -41,4 +41,27 @@ export async function GetBlogList(params: any) : Promise<Result<CoverToPageData<
  */
 export async  function GetBlogById(id: string) : Promise<Result<Blog>>{
   return request<Result<Blog>>('/api/blog/get/'+id)
+}
+
+
+/**
+ * 查询博客的分类列表
+ * @constructor
+ */
+export async function MyBlogControllerWithFindBlogCategoryList(params: any) : Promise<Result<JpaPage<BlogCategory>>>{
+  return request('/api/blog/categorys',{
+    method: 'GET',
+    params
+  })
+}
+
+/**
+ * 修改或者新增博客分类
+ * @constructor
+ */
+export async function MyBlogControllerWithUpdateBlogCategory(params: BlogCategory) : Promise<Result<BlogCategory>>{
+  return request('/api/blog/update-category',{
+    method: 'POST',
+    data: params
+  })
 }

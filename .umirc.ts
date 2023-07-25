@@ -102,6 +102,11 @@ export default defineConfig({
           path: '/blog/add',
           component: './Blog/add',
         },
+        {
+          name: '博客分类',
+          path: "/blog/categorys",
+          component: './Blog/Category'
+        }
       ],
     },
     {

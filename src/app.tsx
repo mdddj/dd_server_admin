@@ -1,28 +1,22 @@
-import { HOST_NAME } from '@/constants';
-import { getJwtToken, removeJwtToken } from '@/utils/cache';
-import { history } from '@@/core/history';
-import {
-  AxiosError,
-  AxiosResponse,
-  RequestConfig,
-  RequestError,
-  RequestOptions,
-} from '@@/plugin-request/request';
-import { Modal, message } from 'antd';
-import dayjs from 'dayjs';
-import 'dayjs/locale/zh-cn';
+import { HOST_NAME } from "@/constants";
+import { getJwtToken, removeJwtToken } from "@/utils/cache";
+import { history } from "@@/core/history";
+import { AxiosError, AxiosResponse, RequestConfig, RequestError, RequestOptions } from "@@/plugin-request/request";
+import { message, Modal } from "antd";
+import dayjs from "dayjs";
+import "dayjs/locale/zh-cn";
 
-import updateLocale from 'dayjs/plugin/updateLocale';
-import { Result, ToastType } from './types/result';
-import { RunTimeLayoutConfig } from "@@/plugin-layout/types";
+import updateLocale from "dayjs/plugin/updateLocale";
+import { Result, ToastType } from "./types/result";
 import GlobalAppBar from "@/components/GlobalAppBar";
 import { User } from "@/types/user";
 import { ApiGetCurrentUser } from "@/services/user/UserController";
 
 dayjs.extend(updateLocale);
-dayjs.updateLocale('zh-cn', {
-  weekStart: 0,
+dayjs.updateLocale("zh-cn", {
+  weekStart: 0
 });
+
 interface ResponseStructure {
   state: number;
   data: any;
@@ -33,19 +27,20 @@ interface ResponseStructure {
 
 class ApiError extends Error {
   info: ResponseStructure;
+
   constructor(res: ResponseStructure) {
     super(res.message);
-    super.name = 'BizError';
+    super.name = "BizError";
     this.info = res;
   }
 }
 
 export interface AppInitialStateModel {
-  user?: User
+  user?: User;
 }
 
 export async function getInitialState(): Promise<AppInitialStateModel> {
-  let result = await ApiGetCurrentUser()
+  let result = await ApiGetCurrentUser();
   return { user: result.data };
 }
 
@@ -56,20 +51,20 @@ export const layout: () => {
   rightRender: (initialState: AppInitialStateModel) => JSX.Element
 } = () => {
   return {
-    logo: 'https://img.alicdn.com/tfs/TB1YHEpwUT1gK0jSZFhXXaAtVXa-28-27.svg',
+    logo: "https://img.alicdn.com/tfs/TB1YHEpwUT1gK0jSZFhXXaAtVXa-28-27.svg",
     menu: {
-      locale: false,
+      locale: false
     },
-    rightRender: (initialState : AppInitialStateModel) => {
-      return <GlobalAppBar initState={initialState}/>
+    rightRender: (initialState: AppInitialStateModel) => {
+      return <GlobalAppBar initState={initialState} />;
     }
   };
 };
 
 export function onRouteChange({ location }: any) {
   let token = getJwtToken();
-  if (token === null && location.pathname !== '/login') {
-    history.push('/login'); // 重定向到登录页面
+  if (token === null && location.pathname !== "/login") {
+    history.push("/login"); // 重定向到登录页面
   }
 }
 
@@ -78,14 +73,14 @@ export const request: RequestConfig = {
   requestInterceptors: [
     (config: RequestConfig) => {
       if (config.headers) {
-        config.headers['Authorization'] = getJwtToken() ?? '';
+        config.headers["Authorization"] = getJwtToken() ?? "";
       } else {
         config.headers = {
-          Authorization: getJwtToken() ?? '',
+          Authorization: getJwtToken() ?? ""
         };
       }
       return config;
-    },
+    }
   ],
   responseInterceptors: [
     (response: AxiosResponse) => {
@@ -93,54 +88,49 @@ export const request: RequestConfig = {
       if (response.status === 200) {
         let data = response.data as Result<any>;
         if (data.type === ToastType.FinnalToast) {
-          message.success(data.message);
+          message.success(data.message).then();
         } else if (data.type === ToastType.FinnalDialog) {
           Modal.success({
-            content: data.message,
+            content: data.message
           });
         }
       }
       return response;
-    },
+    }
   ],
   errorConfig: {
     errorHandler(error: RequestError, opts: RequestOptions) {
+
       if (opts?.skipErrorHandler) throw error;
-      console.log('进来了' + typeof error);
       if (error instanceof ApiError) {
-        console.log('error 是 ApiError');
         let result = error.info;
         if (result.state === 401) {
           removeJwtToken();
-          location.href = '/login';
+          location.href = "/login";
           return;
         }
-        if (error.name === 'BizError') {
-          const errorInfo: ResponseStructure = error.info;
-          if (errorInfo) {
-            switch (errorInfo.type) {
-              case ToastType.Toast:
-                message.error(errorInfo.message);
-                break;
-              case ToastType.Dialog:
-                Modal.error({ content: errorInfo.message, title: '操作失败' });
-                break;
-              case ToastType.None:
-              case ToastType.Notice:
-            }
+        const errorInfo: ResponseStructure = error.info;
+        if (errorInfo) {
+          switch (errorInfo.type) {
+            case ToastType.Toast:
+              message.error(errorInfo.message).then();
+              break;
+            case ToastType.Dialog:
+              Modal.error({ content: errorInfo.message, title: "操作失败" });
+              break;
+            case ToastType.None:
+            case ToastType.Notice:
           }
         }
       } else {
         const axiosError = error as AxiosError;
-        message.error(axiosError.message);
+        message.error(axiosError.message).then();
       }
     },
     errorThrower(res: ResponseStructure) {
-      console.log(res);
       if (!res.success) {
-        const error = new ApiError(res);
-        throw error;
+        throw new ApiError(res);
       }
-    },
-  },
+    }
+  }
 };
