@@ -22,14 +22,9 @@ pnpm dev
 修改src / constants / index.ts里面的HOST_NAME变量;
 ```
 
-```bash
 
-docker run -id -p 80:80 \
---name dd_admin --restart always --privileged=true \
--v /opt/docker/openresty/nginx/conf/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf \
--v /opt/docker/openresty/nginx/logs:/usr/local/openresty/nginx/logs \
--v /opt/docker/openresty/html:/usr/local/openresty/nginx/html \
--v /etc/localtime:/etc/localtime \
-openresty/openresty
 
-```
+# 预览 (部分)
+[![image.png](https://i.postimg.cc/d3xbWM7x/image.png)](https://postimg.cc/fSYqLrfc)
+[![image.png](https://i.postimg.cc/cJh59q2B/image.png)](https://postimg.cc/cKKmCzsv)
+[![image.png](https://i.postimg.cc/fW1ZjXxT/image.png)](https://postimg.cc/Rq1jvWsj)
