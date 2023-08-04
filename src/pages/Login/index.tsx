@@ -25,8 +25,8 @@ export default function Page() {
       }
     });
   });
-  const [loginType, setLoginType] = useState<LoginType>('account');
-  const { setInitialState } = useModel('@@initialState');
+  const [loginType, setLoginType] = useState<LoginType>('email');
+  const { setInitialState, initialState } = useModel('@@initialState');
   const doLogin = async (values: any) => {
     let hide = message.loading('正在登录');
     try {
@@ -34,9 +34,9 @@ export default function Page() {
         { ...values, loginType: loginType },
         loginType,
       );
-      hide();
       setJwtToken(result.data.token);
-      setInitialState(result.data.user);
+      await setInitialState({ ...initialState, user: result.data.user });
+      hide();
       nav('/');
     } catch (e) {
       hide();
@@ -46,9 +46,8 @@ export default function Page() {
   return (
     <div style={{ backgroundColor: 'white' }}>
       <LoginForm
-        logo="https://github.githubassets.com/images/modules/logos_page/Octocat.png"
         title="典典の小卖部"
-        subTitle="后台管理"
+        subTitle="后台管理平台"
         onFinish={doLogin}
       >
         <Tabs

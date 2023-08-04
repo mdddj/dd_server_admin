@@ -66,15 +66,16 @@ export async function MyDtkServiceVerifyDtkAccountApi(
   });
 }
 
-
 /**
  * 删除大淘客账号
  * @param id 主键
  * @constructor
  */
-export async function MyDtkServiceDeleteApi(id: number) : Promise<Result<boolean>> {
-  return request('/api/v1/dtk/detail/delete',{
+export async function MyDtkServiceDeleteApi(
+  id: number,
+): Promise<Result<boolean>> {
+  return request('/api/v1/dtk/detail/delete', {
     method: 'DELETE',
-    params: {id}
-  })
+    params: { id },
+  });
 }

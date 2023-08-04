@@ -1,5 +1,5 @@
-import * as EnterpriseController from './EnterpriseController'
+import * as EnterpriseController from './EnterpriseController';
 
-export default  {
-    EnterpriseController
-}
+export default {
+  EnterpriseController,
+};

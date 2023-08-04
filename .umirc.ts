@@ -8,20 +8,18 @@ export default defineConfig({
   request: {},
   layout: {
     title: '典典的小卖部',
-
   },
   routes: [
     {
       path: '/',
       redirect: '/home',
       access: 'canSeeAdmin',
-
     },
     {
       name: '首页',
       path: '/home',
       component: './Home',
-      icon: 'HomeOutlined'
+      icon: 'HomeOutlined',
     },
     {
       name: '登录',
@@ -39,7 +37,7 @@ export default defineConfig({
       name: '用户管理',
       path: '/users',
       component: './Users',
-      icon: 'UserOutlined'
+      icon: 'UserOutlined',
     },
     {
       name: '企业管理',
@@ -104,9 +102,9 @@ export default defineConfig({
         },
         {
           name: '博客分类',
-          path: "/blog/categorys",
-          component: './Blog/Category'
-        }
+          path: '/blog/categorys',
+          component: './Blog/Category',
+        },
       ],
     },
     {
@@ -118,6 +116,16 @@ export default defineConfig({
           name: '分类列表',
           path: '/resource/category',
           component: './Resource/CategoryList',
+        },
+        {
+          name: '动态列表',
+          path: '/resource/list',
+          component: './Resource/MyResourceList',
+        },
+        {
+          name: '添加动态',
+          path: '/resource/add',
+          component: './Resource/AddResourceForm',
         },
       ],
     },

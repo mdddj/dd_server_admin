@@ -1,4 +1,4 @@
-import Update from './Update'
+import Update from './Update';
 
-export default Update
-export * from './Update'
+export default Update;
+export * from './Update';

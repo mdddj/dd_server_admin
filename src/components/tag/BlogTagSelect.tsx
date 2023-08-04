@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import type { InputRef } from 'antd';
 import { Input, Tag, theme } from 'antd';
 import { TweenOneGroup } from 'rc-tween-one';
+import React, { useEffect, useRef, useState } from 'react';
 type TagSelectProps = {
-  tags: string[],
-  onChange: (tags:string[]) =>void
-}
-const TagSelect: React.FC<TagSelectProps> = ({onChange,tags}) => {
+  tags: string[];
+  onChange: (tags: string[]) => void;
+};
+const TagSelect: React.FC<TagSelectProps> = ({ onChange, tags }) => {
   const { token } = theme.useToken();
   const [inputVisible, setInputVisible] = useState(false);
   const [inputValue, setInputValue] = useState('');

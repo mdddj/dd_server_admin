@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './CreateAdminPage.less';
 
 export default function Page() {

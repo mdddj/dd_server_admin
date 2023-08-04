@@ -1,20 +1,26 @@
-import { HOST_NAME } from "@/constants";
-import { getJwtToken, removeJwtToken } from "@/utils/cache";
-import { history } from "@@/core/history";
-import { AxiosError, AxiosResponse, RequestConfig, RequestError, RequestOptions } from "@@/plugin-request/request";
-import { message, Modal } from "antd";
-import dayjs from "dayjs";
-import "dayjs/locale/zh-cn";
+import { HOST_NAME } from '@/constants';
+import { getJwtToken, removeJwtToken } from '@/utils/cache';
+import { history } from '@@/core/history';
+import {
+  AxiosError,
+  AxiosResponse,
+  RequestConfig,
+  RequestError,
+  RequestOptions,
+} from '@@/plugin-request/request';
+import { Modal, message } from 'antd';
+import dayjs from 'dayjs';
+import 'dayjs/locale/zh-cn';
 
-import updateLocale from "dayjs/plugin/updateLocale";
-import { Result, ToastType } from "./types/result";
-import GlobalAppBar from "@/components/GlobalAppBar";
-import { User } from "@/types/user";
-import { ApiGetCurrentUser } from "@/services/user/UserController";
+import GlobalAppBar from '@/components/GlobalAppBar';
+import { ApiGetCurrentUser } from '@/services/user/UserController';
+import { User } from '@/types/user';
+import updateLocale from 'dayjs/plugin/updateLocale';
+import { Result, ToastType } from './types/result';
 
 dayjs.extend(updateLocale);
-dayjs.updateLocale("zh-cn", {
-  weekStart: 0
+dayjs.updateLocale('zh-cn', {
+  weekStart: 0,
 });
 
 interface ResponseStructure {
@@ -30,7 +36,7 @@ class ApiError extends Error {
 
   constructor(res: ResponseStructure) {
     super(res.message);
-    super.name = "BizError";
+    super.name = 'BizError';
     this.info = res;
   }
 }
@@ -40,31 +46,34 @@ export interface AppInitialStateModel {
 }
 
 export async function getInitialState(): Promise<AppInitialStateModel> {
-  let result = await ApiGetCurrentUser();
-  return { user: result.data };
+  let token = getJwtToken() ?? '';
+  if (token !== '') {
+    let result = await ApiGetCurrentUser();
+    return { user: result.data };
+  }
+  return {};
 }
-
 
 export const layout: () => {
   logo: string;
   menu: { locale: boolean };
-  rightRender: (initialState: AppInitialStateModel) => JSX.Element
+  rightRender: (initialState: AppInitialStateModel) => JSX.Element;
 } = () => {
   return {
-    logo: "https://img.alicdn.com/tfs/TB1YHEpwUT1gK0jSZFhXXaAtVXa-28-27.svg",
+    logo: 'https://img.alicdn.com/tfs/TB1YHEpwUT1gK0jSZFhXXaAtVXa-28-27.svg',
     menu: {
-      locale: false
+      locale: false,
     },
     rightRender: (initialState: AppInitialStateModel) => {
       return <GlobalAppBar initState={initialState} />;
-    }
+    },
   };
 };
 
 export function onRouteChange({ location }: any) {
   let token = getJwtToken();
-  if (token === null && location.pathname !== "/login") {
-    history.push("/login"); // 重定向到登录页面
+  if (token === null && location.pathname !== '/login') {
+    history.push('/login'); // 重定向到登录页面
   }
 }
 
@@ -72,41 +81,42 @@ export const request: RequestConfig = {
   baseURL: HOST_NAME,
   requestInterceptors: [
     (config: RequestConfig) => {
-      if (config.headers) {
-        config.headers["Authorization"] = getJwtToken() ?? "";
-      } else {
-        config.headers = {
-          Authorization: getJwtToken() ?? ""
-        };
+      let token = getJwtToken() ?? '';
+      if (token !== '') {
+        if (config.headers) {
+          config.headers['Authorization'] = token;
+        } else {
+          config.headers = {
+            Authorization: token,
+          };
+        }
       }
       return config;
-    }
+    },
   ],
   responseInterceptors: [
     (response: AxiosResponse) => {
-      message.destroy();
       if (response.status === 200) {
         let data = response.data as Result<any>;
         if (data.type === ToastType.FinnalToast) {
           message.success(data.message).then();
         } else if (data.type === ToastType.FinnalDialog) {
           Modal.success({
-            content: data.message
+            content: data.message,
           });
         }
       }
       return response;
-    }
+    },
   ],
   errorConfig: {
     errorHandler(error: RequestError, opts: RequestOptions) {
-
       if (opts?.skipErrorHandler) throw error;
       if (error instanceof ApiError) {
         let result = error.info;
         if (result.state === 401) {
           removeJwtToken();
-          location.href = "/login";
+          location.href = '/login';
           return;
         }
         const errorInfo: ResponseStructure = error.info;
@@ -116,7 +126,7 @@ export const request: RequestConfig = {
               message.error(errorInfo.message).then();
               break;
             case ToastType.Dialog:
-              Modal.error({ content: errorInfo.message, title: "操作失败" });
+              Modal.error({ content: errorInfo.message, title: '操作失败' });
               break;
             case ToastType.None:
             case ToastType.Notice:
@@ -131,6 +141,6 @@ export const request: RequestConfig = {
       if (!res.success) {
         throw new ApiError(res);
       }
-    }
-  }
+    },
+  },
 };

@@ -2,22 +2,6 @@ import { Modal, ModalProps } from 'antd';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { MyFileSelectionProp } from './MyFileSelection';
-// import {create} from "zustand";
-// type FileModalContext = {
-//   open: boolean,
-//   setOpen: (open: boolean) => void;
-// }
-// export const useContext = create<FileModalContext>((set)=>{
-//   return {
-//     open: false,
-//     setOpen(open){
-//       set((pre)=>({
-//         ...pre,
-//         open:open
-//       }))
-//     }
-//   }
-// })
 
 export const FileSelectorComponent: React.FC = (props: any) => {
   return <Modal {...props}></Modal>;

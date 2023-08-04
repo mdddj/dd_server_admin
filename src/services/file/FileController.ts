@@ -1,17 +1,18 @@
-import { CoverToPageData, Result } from "@/types/result";
-import { request } from "@umijs/max";
-import { FileInfo } from "./type";
-
+import { CoverToPageData, Result } from '@/types/result';
+import { request } from '@umijs/max';
+import { FileInfo } from './type';
 
 /**
  * 获取全部文件
  * @param params 分页参数
  * @constructor
  */
-export async function GetAllFile(params: any) : Promise<Result<CoverToPageData<FileInfo>>> { 
-    return request<Result<CoverToPageData<FileInfo>>>("/api/file/list",{
-        params
-    })
+export async function GetAllFile(
+  params: any,
+): Promise<Result<CoverToPageData<FileInfo>>> {
+  return request<Result<CoverToPageData<FileInfo>>>('/api/file/list', {
+    params,
+  });
 }
 
 /**
@@ -20,8 +21,8 @@ export async function GetAllFile(params: any) : Promise<Result<CoverToPageData<F
  * @constructor
  */
 export async function DeleteFileById(id: number) {
-    return request("/api/storage/delete",{
-        method: 'DELETE',
-        params: {id}
-    })
+  return request('/api/storage/delete', {
+    method: 'DELETE',
+    params: { id },
+  });
 }

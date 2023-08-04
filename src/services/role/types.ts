@@ -1,8 +1,9 @@
-declare namespace RoleApi {
-  interface Role {
-    id: number | undefined
-    name: string
-  }
+export interface Role {
+  id?: number;
+  name: string;
+  note?: string;
+  createDate?: Date;
+  status?: number;
+  sort?: number;
+  icon?: string;
 }
-
-export default RoleApi

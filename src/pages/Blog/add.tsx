@@ -1,4 +1,4 @@
-import { OpenFileSelectionModal } from '@/components/file/MyFileSelection';
+import FileSelectWidget from '@/components/file/FileSelectComponent';
 import TagSelect from '@/components/tag/BlogTagSelect';
 import {
   GetBlogById,
@@ -9,6 +9,7 @@ import { Blog, BlogCategory } from '@/types/blog';
 import { useSearchParams } from '@@/exports';
 import { PageContainer } from '@ant-design/pro-components';
 import MDEditor from '@uiw/react-md-editor';
+import markdown from '@wcj/markdown-to-html';
 import { Button, Card, Form, Input, Select, message } from 'antd';
 import React, { useEffect, useState } from 'react';
 
@@ -56,6 +57,10 @@ const Page: React.FC = () => {
   const push = async (values: Blog) => {
     console.log(values);
     const hide = message.loading('正在发布');
+    const html = markdown(values.content);
+    if (typeof html === 'string') {
+      values.html = html;
+    }
     const result = await PushOneBlog(values);
     message.success(result.message);
     hide();
@@ -117,22 +122,13 @@ const Page: React.FC = () => {
             <Input />
           </Form.Item>
           <Form.Item label={'主图'} name={'thumbnail'}>
-            <Input
-              suffix={
-                <Button
-                  onClick={() => {
-                    OpenFileSelectionModal({
-                      onFileSelect: (fileInfo) => {
-                        console.log(fileInfo.url);
-                        form.setFieldValue('thumbnail', fileInfo.url);
-                      },
-                    });
-                  }}
-                >
-                  资源选择
-                </Button>
+            <FileSelectWidget
+              onFileSelect={(fileInfo) =>
+                form.setFieldValue('thumbnail', fileInfo.url)
               }
-            />
+            >
+              <Input />
+            </FileSelectWidget>
           </Form.Item>
           <Form.Item label={'标签'} name={'tags'}>
             <TagSelect tags={tags} onChange={setTags} />

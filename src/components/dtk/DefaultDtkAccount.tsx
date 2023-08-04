@@ -1,7 +1,7 @@
 import { MyDtkServiceFindDefaultApi } from '@/services/dtk/DtkService';
 import { useRequest } from '@umijs/max';
 import { Spin, Tag } from 'antd';
-import React from "react";
+import React from 'react';
 
 const DefaultDtsAccountWidget: React.FC = () => {
   const { loading, data, error } = useRequest(() =>
