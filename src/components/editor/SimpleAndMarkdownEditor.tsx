@@ -1,4 +1,8 @@
-import { ProFormItem, ProFormTextArea } from '@ant-design/pro-components';
+import {
+  ProFormItem,
+  ProFormItemProps,
+  ProFormTextArea,
+} from '@ant-design/pro-components';
 import MDEditor from '@uiw/react-md-editor';
 import markdown from '@wcj/markdown-to-html';
 import { Switch } from 'antd';
@@ -18,9 +22,9 @@ type SimpleAndMarkdownEditorProp = {
  * @param props
  * @constructor
  */
-const SimpleAndMarkdownEditor: React.FC<SimpleAndMarkdownEditorProp> = (
-  props,
-) => {
+const SimpleAndMarkdownEditor: React.FC<
+  SimpleAndMarkdownEditorProp & ProFormItemProps
+> = (props) => {
   const [mk, setMk] = useState(false);
   const s = () => (
     <>
@@ -30,7 +34,12 @@ const SimpleAndMarkdownEditor: React.FC<SimpleAndMarkdownEditorProp> = (
   return (
     <>
       {mk && (
-        <ProFormItem label={props.label} name={props.name} extra={s()}>
+        <ProFormItem
+          label={props.label}
+          name={props.name}
+          extra={s()}
+          {...props}
+        >
           <MDEditor
             onChange={(value) => {
               props.onChange?.(value ?? '', markdown(value) as string);
@@ -47,6 +56,7 @@ const SimpleAndMarkdownEditor: React.FC<SimpleAndMarkdownEditorProp> = (
             rows: 8,
           }}
           extra={s()}
+          {...props}
         />
       )}
     </>

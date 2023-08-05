@@ -22,9 +22,6 @@ pnpm dev
 修改src / constants / index.ts里面的HOST_NAME变量;
 ```
 
-
-
 # 预览 (部分)
-[![image.png](https://i.postimg.cc/d3xbWM7x/image.png)](https://postimg.cc/fSYqLrfc)
-[![image.png](https://i.postimg.cc/cJh59q2B/image.png)](https://postimg.cc/cKKmCzsv)
-[![image.png](https://i.postimg.cc/fW1ZjXxT/image.png)](https://postimg.cc/Rq1jvWsj)
+
+[![image.png](https://i.postimg.cc/d3xbWM7x/image.png)](https://postimg.cc/fSYqLrfc) [![image.png](https://i.postimg.cc/cJh59q2B/image.png)](https://postimg.cc/cKKmCzsv) [![image.png](https://i.postimg.cc/fW1ZjXxT/image.png)](https://postimg.cc/Rq1jvWsj)

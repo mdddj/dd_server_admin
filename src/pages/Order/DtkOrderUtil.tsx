@@ -30,6 +30,7 @@ import {
 } from 'antd';
 import dayjs from 'dayjs';
 import { useState } from 'react';
+import OrderStatusComponent from "@/components/dtk/OrderStatusComponent";
 
 export default function Page() {
   const [data, setData] = useState<DtkOrderResult | undefined>(undefined);
@@ -178,6 +179,10 @@ export default function Page() {
                         dataIndex: 'pubSharePreFee',
                         title: '预估佣金',
                       },
+                        {
+                            dataIndex: 'relationId',
+                            title: '渠道ID'
+                        },
                       {
                         dataIndex: 'tradeParentid',
                         title: '订单编号',
@@ -197,19 +202,7 @@ export default function Page() {
                         title: '状态',
                         render: (_, entity) => {
                           return (
-                            <>
-                              {entity.tkStatus && (
-                                <Tag
-                                  color={
-                                    entity.tkStatus === TkStatus.订单结算
-                                      ? 'success'
-                                      : undefined
-                                  }
-                                >
-                                  {TkStatus[entity.tkStatus].toString()}
-                                </Tag>
-                              )}
-                            </>
+                            <OrderStatusComponent status={entity.tkStatus} />
                           );
                         },
                       },

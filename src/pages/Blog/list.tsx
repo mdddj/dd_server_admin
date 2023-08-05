@@ -2,7 +2,7 @@ import { GetBlogList } from '@/services/blog/BlogController';
 import { Blog } from '@/types/blog';
 import { useNavigate } from '@@/exports';
 import { PageContainer, ProList } from '@ant-design/pro-components';
-import { Avatar, Button, Card, Space, Tag } from 'antd';
+import { Avatar, Button, Card, Space, Tag, Typography } from 'antd';
 import React from 'react';
 
 const Page: React.FC = () => {
@@ -23,7 +23,7 @@ const Page: React.FC = () => {
           }}
           metas={{
             avatar: {
-              render: (dom, entity) => {
+              render: (_, entity) => {
                 return <Avatar>{entity.id}</Avatar>;
               },
             },
@@ -31,7 +31,7 @@ const Page: React.FC = () => {
               dataIndex: 'title',
             },
             subTitle: {
-              render: (dom, entity) => {
+              render: (_, entity) => {
                 return (
                   <Space>
                     {entity.tags.map((value) => (
@@ -42,18 +42,23 @@ const Page: React.FC = () => {
               },
             },
             description: {
-              render: (dom, entity) => {
+              render: (_, entity) => {
                 return (
                   <Space>
                     <a>{entity.author}</a>
                     <span>发布于</span>
                     <a>{entity.createTime}</a>
+                    {entity.html === '' && (
+                      <Typography.Text type={'warning'}>
+                        未生成html
+                      </Typography.Text>
+                    )}
                   </Space>
                 );
               },
             },
             actions: {
-              render: (dom, entity) => {
+              render: (_, entity) => {
                 return (
                   <Space>
                     <Button

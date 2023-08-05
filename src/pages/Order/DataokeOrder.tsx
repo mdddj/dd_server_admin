@@ -2,6 +2,8 @@ import { OrderSelectParam, UserOrder } from '@/models/order';
 import { MyOrdersSelectApi } from '@/services/order/OrderService';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
 import { Image } from 'antd';
+import OrderStatusComponent from "@/components/dtk/OrderStatusComponent";
+
 export default function Page() {
   return (
     <PageContainer title={'用户订单'}>
@@ -34,6 +36,13 @@ export default function Page() {
           {
             dataIndex: 'pubSharePreFee',
             title: '预计佣金',
+          },
+          {
+            dataIndex: 'tkStatus',
+            title: '状态',
+              render: (_, entity) => {
+                return <OrderStatusComponent status={entity.tkStatus} />
+              }
           },
         ]}
         rowKey={'id'}

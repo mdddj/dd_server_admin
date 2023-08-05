@@ -6,6 +6,7 @@ export interface DTKDetail {
   intro?: string;
   selectDefault?: boolean;
   logo?: string;
+  relationId?: string;
 }
 
 /**

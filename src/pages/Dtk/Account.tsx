@@ -1,5 +1,6 @@
 import DefaultDtsAccountWidget from '@/components/dtk/DefaultDtkAccount';
 import DesensitizationTextWidget from '@/components/widget/DesensitizationText';
+import { ChannelGenerateWidget } from '@/components/zhe/ChannelGenerateWidget';
 import { DTKDetail } from '@/models/tdk';
 import {
   MyDtkServiceAddApi,
@@ -150,6 +151,7 @@ const DtkDetailForm: React.FC<DtkDetailFormProp> = ({
       <ProFormText name={'title'} label={'标题'} />
       <ProFormTextArea name={'intro'} label={'介绍'} />
       <ProFormText name={'logo'} label={'图标'} />
+      <ProFormText name={'relationId'} label={'渠道关系ID'} />
       <ProFormCheckbox name={'selectDefault'}>
         设置为默认应用 <DefaultDtsAccountWidget />
       </ProFormCheckbox>
@@ -176,7 +178,10 @@ export default function Page() {
   return (
     <PageContainer
       title={'大淘客账号管理'}
-      extra={[<DtkDetailForm key={'add'} />]}
+      extra={[
+        <DtkDetailForm key={'add'} />,
+        <ChannelGenerateWidget key={'channel-tool'} />,
+      ]}
     >
       <Card>
         <ProTable<DTKDetail>

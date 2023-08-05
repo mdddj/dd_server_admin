@@ -16,6 +16,7 @@ import GlobalAppBar from '@/components/GlobalAppBar';
 import { ApiGetCurrentUser } from '@/services/user/UserController';
 import { User } from '@/types/user';
 import updateLocale from 'dayjs/plugin/updateLocale';
+import React from 'react';
 import { Result, ToastType } from './types/result';
 
 dayjs.extend(updateLocale);
@@ -57,15 +58,15 @@ export async function getInitialState(): Promise<AppInitialStateModel> {
 export const layout: () => {
   logo: string;
   menu: { locale: boolean };
-  rightRender: (initialState: AppInitialStateModel) => JSX.Element;
+  rightRender: (initialState: AppInitialStateModel) => React.ReactNode;
 } = () => {
   return {
     logo: 'https://img.alicdn.com/tfs/TB1YHEpwUT1gK0jSZFhXXaAtVXa-28-27.svg',
     menu: {
       locale: false,
     },
-    rightRender: (initialState: AppInitialStateModel) => {
-      return <GlobalAppBar initState={initialState} />;
+    rightRender: (initialState: AppInitialStateModel | undefined) => {
+      return <>{initialState && <GlobalAppBar initState={initialState} />}</>;
     },
   };
 };

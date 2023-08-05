@@ -1,3 +1,4 @@
+import FileSelectWidget from '@/components/file/FileSelectComponent';
 import {
   MyBlogControllerWithFindBlogCategoryList,
   MyBlogControllerWithUpdateBlogCategory,
@@ -7,12 +8,13 @@ import {
   ModalForm,
   PageContainer,
   ProFormDatePicker,
+  ProFormInstance,
   ProFormText,
   ProFormTextArea,
   ProTable,
 } from '@ant-design/pro-components';
 import { Button, Card, Image, Space, message } from 'antd';
-import React from 'react';
+import React, { useRef } from 'react';
 
 type CategoryFormProp = {
   initValue?: BlogCategory;
@@ -24,6 +26,7 @@ type CategoryFormProp = {
  * @constructor
  */
 const CategoryForm: React.FC<CategoryFormProp> = ({ initValue, onSuccess }) => {
+  const formRef = useRef<ProFormInstance<BlogCategory>>();
   //提交或者修改
   const onFinish = async (value: BlogCategory) => {
     message.loading('正在请求');
@@ -36,6 +39,7 @@ const CategoryForm: React.FC<CategoryFormProp> = ({ initValue, onSuccess }) => {
 
   return (
     <ModalForm
+      formRef={formRef}
       modalProps={{
         destroyOnClose: true,
       }}
@@ -60,7 +64,22 @@ const CategoryForm: React.FC<CategoryFormProp> = ({ initValue, onSuccess }) => {
         ]}
       />
 
-      <ProFormText name={'logo'} label={'分类图标'} />
+      <FileSelectWidget
+        onFileSelect={(fileInfo) =>
+          formRef.current?.setFieldValue('logo', fileInfo.url)
+        }
+      >
+        <ProFormText
+          name={'logo'}
+          label={'分类图标'}
+          rules={[
+            {
+              type: 'url',
+              message: '需要图片链接',
+            },
+          ]}
+        />
+      </FileSelectWidget>
       <ProFormTextArea name={'intro'} label={'介绍,简介'} />
 
       <ProFormDatePicker name={'createTime'} label={'创建时间'} />

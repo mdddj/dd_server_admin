@@ -39,7 +39,7 @@ export interface UserOrder {
   tkDepositTime: string;
   tkOrderRole: number;
   tkPaidTime: Date;
-  tkStatus: number;
+  tkStatus: TkStatus;
   tkTotalRate: string;
   totalCommissionFee: string;
   totalCommissionRate: string;
