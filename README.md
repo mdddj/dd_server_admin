@@ -25,3 +25,8 @@ pnpm dev
 # 预览 (部分)
 
 [![image.png](https://i.postimg.cc/d3xbWM7x/image.png)](https://postimg.cc/fSYqLrfc) [![image.png](https://i.postimg.cc/cJh59q2B/image.png)](https://postimg.cc/cKKmCzsv) [![image.png](https://i.postimg.cc/fW1ZjXxT/image.png)](https://postimg.cc/Rq1jvWsj)
+
+
+docker run -itd --name="onenav_extend" -p 8080:80 \
+    -v /volume1/docker/OneNav-master:/data/wwwroot/default \
+    tznb/onenav_extend

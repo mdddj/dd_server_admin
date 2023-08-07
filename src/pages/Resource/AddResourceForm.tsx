@@ -1,6 +1,7 @@
 import SimpleAndMarkdownEditor from '@/components/editor/SimpleAndMarkdownEditor';
 import FileSelectWidget from '@/components/file/FileSelectComponent';
 import { ResourceCategorySelectProForm } from '@/components/selects/ResourceCategorySelect';
+import ResourceCategoryTypeSelect from '@/components/selects/ResourceCategoryType';
 import { MyResourceAddPostApi } from '@/services/resource/apis';
 import { MyResources } from '@/types/resource';
 import {
@@ -22,7 +23,6 @@ export default function Page() {
    * @param values
    */
   const submit = async (values: MyResources): Promise<boolean> => {
-    console.log(values);
     let hide = message.loading('请稍等');
     let data = await MyResourceAddPostApi(values);
     hide();
@@ -88,7 +88,7 @@ export default function Page() {
                 },
               ]}
             />
-            <ProFormText name={'type'} label={'类型'} />
+            <ResourceCategoryTypeSelect name={'type'} label={'类型'} />
           </ProForm.Group>
           <ProForm.Group>
             <ProFormText
