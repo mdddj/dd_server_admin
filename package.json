@@ -11,7 +11,7 @@
     "start": "npm run dev"
   },
   "dependencies": {
-    "@ant-design/icons": "^5.2.4",
+    "@ant-design/icons": "^5.2.5",
     "@ant-design/pro-components": "^2.6.11",
     "@uiw/react-md-editor": "^3.23.5",
     "@umijs/max": "^4.0.74",
@@ -20,10 +20,10 @@
     "dayjs": "^1.11.9",
     "rc-tween-one": "^3.0.6",
     "react-use": "^17.4.0",
-    "zustand": "^4.4.0"
+    "zustand": "^4.4.1"
   },
   "devDependencies": {
-    "@types/react": "^18.2.18",
+    "@types/react": "^18.2.19",
     "@types/react-dom": "^18.2.7",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.3",
