@@ -4,9 +4,11 @@ import {
 } from '@/services/resource/apis';
 import { MyResources } from '@/types/resource';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
-import { Button, Popconfirm, Space, message } from 'antd';
+import { useNavigate } from '@umijs/max';
+import {Button, Popconfirm, Space, message, Image} from 'antd';
 
 export default function Page() {
+  const nav = useNavigate();
   return (
     <PageContainer title={'动态列表'}>
       <ProTable<MyResources>
@@ -42,29 +44,9 @@ export default function Page() {
             title: '发布时间',
           },
           {
-            key: 'updateDate',
-            dataIndex: 'updateDate',
-            title: '修改时间',
-          },
-          {
-            key: 'label',
-            dataIndex: 'label',
-            title: '标签',
-          },
-          {
-            key: 'thumbnailImage',
-            dataIndex: 'thumbnailImage',
-            title: '缩略图',
-          },
-          {
             key: 'description',
             dataIndex: 'description',
             title: '描述',
-          },
-          {
-            key: 'links',
-            dataIndex: 'links',
-            title: '链接',
           },
           {
             key: 'type',
@@ -72,29 +54,18 @@ export default function Page() {
             title: '类型',
           },
           {
-            key: 'authority',
-            dataIndex: 'authority',
-            title: '权限',
-          },
-          {
-            key: 'clickCount',
-            dataIndex: 'clickCount',
-            title: '点击量',
-          },
-          {
-            key: 'fileInfo',
-            dataIndex: 'fileInfo',
-            title: '文件专用',
-          },
-          {
             key: 'images',
             dataIndex: 'images',
             title: '图片列表',
-          },
-          {
-            key: 'mianji',
-            dataIndex: 'mianji',
-            title: '面基专用',
+              render: (dom, entity) => {
+                return <>
+                {
+                    entity.images?.map((v)=>{
+                        return <Image key={v.id} src={v.url} width={12} height={12} />
+                    })
+                }
+                </>
+              }
           },
           {
             key: 'browserUrl',
@@ -106,6 +77,14 @@ export default function Page() {
             render: (dom, entity, _, action) => {
               return (
                 <Space>
+                  <Button
+                    onClick={() => {
+                      nav('/resource/add?update=' + entity.id);
+                    }}
+                    size={'small'}
+                  >
+                    编辑
+                  </Button>
                   <Popconfirm
                     title={'确定删除吗?'}
                     onConfirm={async () => {

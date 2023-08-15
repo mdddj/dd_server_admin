@@ -4,7 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="812b1a1b-4f52-40e2-82bf-c5a333dc2326" name="Changes" comment="流程优化" />
+    <list default="true" id="812b1a1b-4f52-40e2-82bf-c5a333dc2326" name="Changes" comment="流程优化">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Resource/AddResourceForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Resource/AddResourceForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Resource/MyResourceList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Resource/MyResourceList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/resource/apis.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/resource/apis.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/auth.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -86,8 +95,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.format" />
         <item itemvalue="npm.dev" />
+        <item itemvalue="npm.format" />
       </list>
     </recent_temporary>
   </component>
@@ -122,6 +131,7 @@
       <workItem from="1691136576465" duration="3152000" />
       <workItem from="1691197578265" duration="4090000" />
       <workItem from="1691255078879" duration="8000" />
+      <workItem from="1691993887248" duration="3142000" />
     </task>
     <task id="LOCAL-00001" summary="细节优化">
       <option name="closed" value="true" />

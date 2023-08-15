@@ -1,5 +1,10 @@
 # README
 
+
+
+后台预览: https://admin.itbug.shop
+
+
 # 典典的小卖部后台管理平台
 
 使用`react,umi,antd`前后端分离的方式编写

@@ -2,7 +2,10 @@ import SimpleAndMarkdownEditor from '@/components/editor/SimpleAndMarkdownEditor
 import FileSelectWidget from '@/components/file/FileSelectComponent';
 import { ResourceCategorySelectProForm } from '@/components/selects/ResourceCategorySelect';
 import ResourceCategoryTypeSelect from '@/components/selects/ResourceCategoryType';
-import { MyResourceAddPostApi } from '@/services/resource/apis';
+import {
+  MyResourceAddPostApi,
+  findResourceByIdApi,
+} from '@/services/resource/apis';
 import { MyResources } from '@/types/resource';
 import {
   PageContainer,
@@ -12,18 +15,58 @@ import {
   ProFormText,
   ProFormUploadButton,
 } from '@ant-design/pro-components';
+import { useSearchParams } from '@umijs/max';
 import { Card, message } from 'antd';
 
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function Page() {
   const formRef = useRef<ProFormInstance<MyResources>>();
+  const [updateModel, setUpdateModel] = useState<MyResources>();
+  const [params] = useSearchParams();
+  let updateId = params.get('update'); //修改的ID
+
+  const initUpdateModel = () => {
+    console.log(updateId);
+    findResourceByIdApi(updateId).then((v) => {
+      console.log(v);
+      let data = v.data;
+      let curr = formRef.current;
+      if (data && curr) {
+        curr.setFieldValue('title', data.title);
+        curr.setFieldValue('content', data.content);
+        curr.setFieldValue('categoryId', data.category?.id);
+        curr.setFieldValue('description', data.description);
+        curr.setFieldValue('createDate', data.createDate);
+        curr.setFieldValue('updateDate', data.updateDate);
+        curr.setFieldValue('label', data.label);
+        curr.setFieldValue('thumbnailImage', data.thumbnailImage);
+        curr.setFieldValue('links', data.links);
+        curr.setFieldValue('type', data.type);
+        curr.setFieldValue('authority', data.authority);
+        curr.setFieldValue('clickCount', data.clickCount);
+        curr.setFieldValue('browserUrl', data.browserUrl);
+        setUpdateModel(data);
+      }
+    });
+  };
+
+  useEffect(() => {
+    if (updateId) {
+      initUpdateModel();
+    }
+  }, [updateId]);
+
   /**
    * 添加动态
    * @param values
    */
-  const submit = async (values: MyResources): Promise<boolean> => {
+  const submit = async (values: any): Promise<boolean> => {
     let hide = message.loading('请稍等');
+    let pics = values.pictures;
+    if(pics && pics as any[]){
+      values.pictures = (pics as any[]).map((v)=>v.originFileObj)
+    }
     let data = await MyResourceAddPostApi(values);
     hide();
     message.info(data.message);
@@ -131,6 +174,15 @@ export default function Page() {
               name: 'pictures',
               listType: 'picture-card',
               multiple: true,
+              defaultFileList: [
+                ...(updateModel?.images?.map((v) => {
+                  return {
+                    uid: `${v.id}`,
+                    url: v.url,
+                    name: v.fileName,
+                  };
+                }) ?? []),
+              ],
             }}
           />
         </ProForm>

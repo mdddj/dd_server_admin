@@ -61,7 +61,7 @@ export const layout: () => {
   rightRender: (initialState: AppInitialStateModel) => React.ReactNode;
 } = () => {
   return {
-    logo: 'https://img.alicdn.com/tfs/TB1YHEpwUT1gK0jSZFhXXaAtVXa-28-27.svg',
+    logo: 'https://i.postimg.cc/bv7RTyvs/avatar-apple.png',
     menu: {
       locale: false,
     },

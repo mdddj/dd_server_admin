@@ -87,3 +87,20 @@ export async function MyResourceAddDeleteApi(id: number): Promise<Result<any>> {
     },
   });
 }
+
+/**
+ * 根据ID查找动态
+  GET /api/app/resource/find-by-id
+  接口ID：92822664
+  接口地址：https://app.apifox.com/link/project/2906745/apis/api-92822664
+ * @param params 
+ */
+export async function findResourceByIdApi(
+  id: any,
+): Promise<Result<MyResources>> {
+  return request('/api/app/resource/find-by-id', {
+    params: {
+      id,
+    },
+  });
+}

@@ -18,6 +18,6 @@ export function getAuthorizationHeader(): Record<string, string> {
  */
 export function formDataHeader(): Record<string, any> {
   return {
-    'Content-Type': 'application/x-www-form-urlencoded',
+    'Content-Type': 'multipart/form-data',
   };
 }
