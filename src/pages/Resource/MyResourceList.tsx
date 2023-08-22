@@ -4,11 +4,9 @@ import {
 } from '@/services/resource/apis';
 import { MyResources } from '@/types/resource';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
-import { useNavigate } from '@umijs/max';
-import {Button, Popconfirm, Space, message, Image} from 'antd';
+import { Button, Image, Popconfirm, Space, message } from 'antd';
 
 export default function Page() {
-  const nav = useNavigate();
   return (
     <PageContainer title={'动态列表'}>
       <ProTable<MyResources>
@@ -57,15 +55,17 @@ export default function Page() {
             key: 'images',
             dataIndex: 'images',
             title: '图片列表',
-              render: (dom, entity) => {
-                return <>
-                {
-                    entity.images?.map((v)=>{
-                        return <Image key={v.id} src={v.url} width={12} height={12} />
-                    })
-                }
-                </>
-              }
+            render: (dom, entity) => {
+              return (
+                <Space>
+                  {entity.images?.map((v) => {
+                    return (
+                      <Image key={v.id} src={v.url} width={44} height={44} />
+                    );
+                  })}
+                </Space>
+              );
+            },
           },
           {
             key: 'browserUrl',
@@ -77,14 +77,6 @@ export default function Page() {
             render: (dom, entity, _, action) => {
               return (
                 <Space>
-                  <Button
-                    onClick={() => {
-                      nav('/resource/add?update=' + entity.id);
-                    }}
-                    size={'small'}
-                  >
-                    编辑
-                  </Button>
                   <Popconfirm
                     title={'确定删除吗?'}
                     onConfirm={async () => {
@@ -117,6 +109,7 @@ export default function Page() {
             total: result.data.totalElements,
           };
         }}
+        rowKey={'id'}
       ></ProTable>
     </PageContainer>
   );

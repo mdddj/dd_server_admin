@@ -32,24 +32,44 @@ export default function Page() {
             description: {
               dataIndex: 'url',
               render: (dom, entity) => (
-                <Typography.Paragraph
-                  copyable={{ text: entity.url }}
-                  type={'secondary'}
-                >
-                  <span>直链:{dom}</span>
-                </Typography.Paragraph>
+                <Space direction={'vertical'} size={'small'}>
+                  <Typography.Paragraph
+                    copyable={{ text: entity.url }}
+                    type={'secondary'}
+                  >
+                    <span>直链:{dom}</span>
+                  </Typography.Paragraph>
+                  {entity.thumbnail && (
+                    <Typography.Paragraph
+                      copyable={{ text: entity.thumbnail }}
+                      type={'secondary'}
+                    >
+                      <span>直链:{entity.thumbnail}</span>
+                    </Typography.Paragraph>
+                  )}
+                </Space>
               ),
             },
             avatar: {
               dataIndex: 'url',
               render: (_dom, entity) => (
-                <Image src={entity.url} width={48} height={48} />
+                <Space>
+                  <Image src={entity.url} width={100} height={100} />
+                  {entity.thumbnail && (
+                    <Image src={entity.thumbnail} width={100} height={100} />
+                  )}
+                </Space>
               ),
             },
             content: {
               dataIndex: 'absolutePath',
-              render: (dom) => {
-                return <span>磁盘路径:{dom}</span>;
+              render: (dom, entity) => {
+                return (
+                  <div>
+                    <div>磁盘路径:{dom}</div>
+                    <div>缩略图:{entity.thumbnailPath}</div>
+                  </div>
+                );
               },
             },
             subTitle: {

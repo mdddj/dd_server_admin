@@ -13,4 +13,6 @@ export interface FileInfo {
   updateDate: string;
   url: string;
   width: number;
+  thumbnailPath: string | undefined;
+  thumbnail: string | undefined;
 }
