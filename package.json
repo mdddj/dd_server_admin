@@ -12,22 +12,22 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.2.5",
-    "@ant-design/pro-components": "^2.6.12",
+    "@ant-design/pro-components": "^2.6.13",
     "@uiw/react-md-editor": "^3.23.5",
-    "@umijs/max": "^4.0.75",
+    "@umijs/max": "^4.0.76",
     "@wcj/markdown-to-html": "^2.2.1",
-    "antd": "^5.8.3",
+    "antd": "^5.8.4",
     "dayjs": "^1.11.9",
     "rc-tween-one": "^3.0.6",
     "react-use": "^17.4.0",
     "zustand": "^4.4.1"
   },
   "devDependencies": {
-    "@types/react": "^18.2.20",
+    "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
     "husky": "^8.0.3",
-    "lint-staged": "^13.2.3",
-    "prettier": "^3.0.1",
+    "lint-staged": "^14.0.1",
+    "prettier": "^3.0.2",
     "prettier-plugin-organize-imports": "^3.2.3",
     "prettier-plugin-packagejson": "^2.4.5",
     "typescript": "^5.1.6"

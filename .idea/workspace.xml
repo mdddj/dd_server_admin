@@ -4,7 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="812b1a1b-4f52-40e2-82bf-c5a333dc2326" name="Changes" comment="流程优化" />
+    <list default="true" id="812b1a1b-4f52-40e2-82bf-c5a333dc2326" name="Changes" comment="流程优化">
+      <change afterPath="$PROJECT_DIR$/src/pages/Project/AddNewProject.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Project/AddNewProject.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Project/List.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Project/List.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Version/AddNewVersion.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Version/AddNewVersion.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/version/VersionDataType.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/version/VersionService.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/types/project.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.umirc.ts" beforeDir="false" afterPath="$PROJECT_DIR$/.umirc.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/dtk/OrderStatusComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dtk/OrderStatusComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/constants/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Enterprise/create.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Enterprise/create.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Order/DataokeOrder.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Order/DataokeOrder.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Order/DtkOrderUtil.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Order/DtkOrderUtil.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Resource/AddResourceForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Resource/AddResourceForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Version/VersionList.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Version/VersionList.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Version/VersionList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Version/VersionList.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,8 +37,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript File" />
         <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -51,8 +75,10 @@
     &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
     &quot;prettier.import.notification.dismissed&quot;: &quot;true&quot;,
@@ -64,6 +90,16 @@
   }
 }</component>
   <component name="RunManager" selected="npm.dev">
+    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -87,6 +123,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.dev" />
+        <item itemvalue="npm.build" />
         <item itemvalue="npm.format" />
       </list>
     </recent_temporary>
@@ -124,6 +161,11 @@
       <workItem from="1691255078879" duration="8000" />
       <workItem from="1691993887248" duration="3142000" />
       <workItem from="1692077287339" duration="13000" />
+      <workItem from="1692668793399" duration="4007000" />
+      <workItem from="1692673140775" duration="6121000" />
+      <workItem from="1692697185820" duration="1468000" />
+      <workItem from="1692752336187" duration="774000" />
+      <workItem from="1692773362429" duration="9066000" />
     </task>
     <task id="LOCAL-00001" summary="细节优化">
       <option name="closed" value="true" />
@@ -149,7 +191,15 @@
       <option name="project" value="LOCAL" />
       <updated>1691207404208</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="流程优化">
+      <option name="closed" value="true" />
+      <created>1692669053433</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1692669053433</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

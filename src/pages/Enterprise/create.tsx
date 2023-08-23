@@ -14,9 +14,8 @@ export default function Create() {
         <ProForm
           onFinish={async (formData) => {
             let hide = message.loading('正在创建');
-            let result = await EnterpriseController.ApiEnterpriseCreate(
-              formData,
-            );
+            let result =
+              await EnterpriseController.ApiEnterpriseCreate(formData);
             hide();
             message.success(result.message);
             return true;

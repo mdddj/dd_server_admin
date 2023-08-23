@@ -64,8 +64,8 @@ export default function Page() {
   const submit = async (values: any): Promise<boolean> => {
     let hide = message.loading('请稍等');
     let pics = values.pictures;
-    if(pics && pics as any[]){
-      values.pictures = (pics as any[]).map((v)=>v.originFileObj)
+    if (pics && (pics as any[])) {
+      values.pictures = (pics as any[]).map((v) => v.originFileObj);
     }
     let data = await MyResourceAddPostApi(values);
     hide();

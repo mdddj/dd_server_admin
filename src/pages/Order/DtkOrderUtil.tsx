@@ -1,10 +1,10 @@
+import OrderStatusComponent from '@/components/dtk/OrderStatusComponent';
 import UserSelectModal from '@/components/users/form/UserSelectModal';
 import SizedBox from '@/components/widget/SizedBox';
 import {
   DtkOrderDto,
   DtkOrderResult,
   DtkOrderSelectParam,
-  TkStatus,
 } from '@/models/order';
 import {
   MySelectDataokeOrderApi,
@@ -24,13 +24,11 @@ import {
   Space,
   Table,
   Tabs,
-  Tag,
   Typography,
   message,
 } from 'antd';
 import dayjs from 'dayjs';
 import { useState } from 'react';
-import OrderStatusComponent from "@/components/dtk/OrderStatusComponent";
 
 export default function Page() {
   const [data, setData] = useState<DtkOrderResult | undefined>(undefined);
@@ -179,10 +177,10 @@ export default function Page() {
                         dataIndex: 'pubSharePreFee',
                         title: '预估佣金',
                       },
-                        {
-                            dataIndex: 'relationId',
-                            title: '渠道ID'
-                        },
+                      {
+                        dataIndex: 'relationId',
+                        title: '渠道ID',
+                      },
                       {
                         dataIndex: 'tradeParentid',
                         title: '订单编号',
@@ -217,9 +215,8 @@ export default function Page() {
                                 onFinish={async (_, userId: number) => {
                                   console.log(userId);
                                   entity.userId = userId;
-                                  let result = await MyUserOrderWirteApi(
-                                    entity,
-                                  );
+                                  let result =
+                                    await MyUserOrderWirteApi(entity);
                                   return result.success;
                                 }}
                               />

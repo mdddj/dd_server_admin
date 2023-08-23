@@ -1,8 +1,8 @@
+import OrderStatusComponent from '@/components/dtk/OrderStatusComponent';
 import { OrderSelectParam, UserOrder } from '@/models/order';
 import { MyOrdersSelectApi } from '@/services/order/OrderService';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
 import { Image } from 'antd';
-import OrderStatusComponent from "@/components/dtk/OrderStatusComponent";
 
 export default function Page() {
   return (
@@ -40,9 +40,9 @@ export default function Page() {
           {
             dataIndex: 'tkStatus',
             title: '状态',
-              render: (_, entity) => {
-                return <OrderStatusComponent status={entity.tkStatus} />
-              }
+            render: (_, entity) => {
+              return <OrderStatusComponent status={entity.tkStatus} />;
+            },
           },
         ]}
         rowKey={'id'}

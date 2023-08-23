@@ -1,7 +1,16 @@
 import { defineConfig } from '@umijs/max';
 
 export default defineConfig({
-  antd: {},
+  antd: {
+    theme: {
+      token: {
+        colorPrimary: '#d21279',
+        colorInfo: '#d21279',
+        colorSuccess: '#4fb51c',
+        colorWarning: '#f7a500',
+      },
+    },
+  },
   access: {},
   model: {},
   initialState: {},
@@ -160,6 +169,40 @@ export default defineConfig({
           name: '账号列表',
           path: '/dtk/accounts',
           component: './Dtk/Account',
+        },
+      ],
+    },
+    {
+      name: '版本管理',
+      path: '/version',
+      icon: 'ForkOutlined',
+      routes: [
+        {
+          name: '版本列表',
+          path: '/version/list',
+          component: './Version/VersionList',
+        },
+        {
+          name: '发布新版本',
+          path: '/version/add',
+          component: './Version/AddNewVersion',
+        },
+      ],
+    },
+    {
+      name: '项目管理',
+      path: '/project',
+      icon: 'ProjectOutlined',
+      routes: [
+        {
+          name: '新增项目',
+          path: '/project/new',
+          component: './Project/AddNewProject',
+        },
+        {
+          name: '项目列表',
+          path: '/project/list',
+          component: './Project/List',
         },
       ],
     },
