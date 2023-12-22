@@ -5,27 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="812b1a1b-4f52-40e2-82bf-c5a333dc2326" name="Changes" comment="流程优化">
-      <change afterPath="$PROJECT_DIR$/src/pages/Project/AddNewProject.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Project/AddNewProject.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Project/List.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Project/List.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Version/AddNewVersion.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Version/AddNewVersion.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/version/VersionDataType.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/version/VersionService.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/types/project.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/Version.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.umirc.ts" beforeDir="false" afterPath="$PROJECT_DIR$/.umirc.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist.zip" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dtk/OrderStatusComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dtk/OrderStatusComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/constants/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Enterprise/create.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Enterprise/create.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Order/DataokeOrder.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Order/DataokeOrder.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Order/DtkOrderUtil.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Order/DtkOrderUtil.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Resource/AddResourceForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Resource/AddResourceForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Login/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Login/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Project/AddNewProject.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Project/AddNewProject.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Version/VersionList.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Version/VersionList.less" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Version/VersionList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Version/VersionList.tsx" afterDir="false" />
     </list>
@@ -45,6 +31,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="MacroExpansionManager">
     <option name="directoryName" value="uklby7wg" />
   </component>
@@ -68,12 +57,14 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.Enable generate summary features in internal mode&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -81,12 +72,18 @@
     &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
+    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
     &quot;prettier.import.notification.dismissed&quot;: &quot;true&quot;,
     &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/hlx/github/dd_server_admin/node_modules/prettier&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,
     &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
     &quot;ts.external.directory.path&quot;: &quot;/Users/hlx/github/dd_server_admin/node_modules/typescript/lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
+    ]
   }
 }</component>
   <component name="RunManager" selected="npm.dev">
@@ -165,7 +162,19 @@
       <workItem from="1692673140775" duration="6121000" />
       <workItem from="1692697185820" duration="1468000" />
       <workItem from="1692752336187" duration="774000" />
-      <workItem from="1692773362429" duration="9066000" />
+      <workItem from="1692773362429" duration="9210000" />
+      <workItem from="1692784578596" duration="702000" />
+      <workItem from="1692844217932" duration="19000" />
+      <workItem from="1693207133186" duration="54000" />
+      <workItem from="1696067229696" duration="3000" />
+      <workItem from="1696067242725" duration="406000" />
+      <workItem from="1696296862914" duration="1853000" />
+      <workItem from="1700024514731" duration="2375000" />
+      <workItem from="1701133264404" duration="2579000" />
+      <workItem from="1701227251980" duration="141000" />
+      <workItem from="1702100098461" duration="1106000" />
+      <workItem from="1703054013317" duration="2535000" />
+      <workItem from="1703058199552" duration="17000" />
     </task>
     <task id="LOCAL-00001" summary="细节优化">
       <option name="closed" value="true" />
@@ -199,7 +208,15 @@
       <option name="project" value="LOCAL" />
       <updated>1692669053433</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="流程优化">
+      <option name="closed" value="true" />
+      <created>1692784287887</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1692784287887</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

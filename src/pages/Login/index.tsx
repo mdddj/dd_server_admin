@@ -46,8 +46,7 @@ export default function Page() {
   return (
     <div style={{ backgroundColor: 'white' }}>
       <LoginForm
-        title="典典の小卖部"
-        subTitle="后台管理平台"
+        title="梁典典的博客后台"
         onFinish={doLogin}
       >
         <Tabs
@@ -129,19 +128,6 @@ export default function Page() {
             />
           </>
         )}
-        <div
-          style={{
-            marginBlockEnd: 24,
-          }}
-        >
-          <a
-            style={{
-              float: 'right',
-            }}
-          >
-            忘记密码
-          </a>
-        </div>
       </LoginForm>
     </div>
   );
