@@ -36,7 +36,11 @@ export default function AddNewVersionForm() {
               formKey.current?.setFieldValue('packageSize', fileInfo.fileSize);
             }}
           >
-            <ProFormText name={'downloadUrl'} label={'下载地址(直链)'} />
+            <ProFormTextArea
+              fieldProps={{ rows: 5 }}
+              name={'downloadUrl'}
+              label={'下载地址(直链)'}
+            />
           </FileSelectWidget>
 
           <ProFormSelect

@@ -8,6 +8,7 @@ import {
   RequestError,
   RequestOptions,
 } from '@@/plugin-request/request';
+import { StyleProvider } from '@ant-design/cssinjs';
 import { Modal, message } from 'antd';
 import dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn';
@@ -15,6 +16,7 @@ import 'dayjs/locale/zh-cn';
 import GlobalAppBar from '@/components/GlobalAppBar';
 import { ApiGetCurrentUser } from '@/services/user/UserController';
 import { User } from '@/types/user';
+import { NextUIProvider } from '@nextui-org/react';
 import updateLocale from 'dayjs/plugin/updateLocale';
 import React from 'react';
 import { Result, ToastType } from './types/result';
@@ -145,3 +147,21 @@ export const request: RequestConfig = {
     },
   },
 };
+
+export function rootContainer(
+  container:
+    | string
+    | number
+    | boolean
+    | React.ReactElement<any, string | React.JSXElementConstructor<any>>
+    | Iterable<React.ReactNode>
+    | React.ReactPortal
+    | null
+    | undefined,
+) {
+  return (
+    <StyleProvider hashPriority="high">
+      <NextUIProvider>{container}</NextUIProvider>
+    </StyleProvider>
+  );
+}

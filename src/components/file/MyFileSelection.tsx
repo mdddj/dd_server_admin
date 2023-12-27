@@ -5,7 +5,8 @@ import { UploadOutlined } from '@ant-design/icons';
 
 import { HOST_NAME } from '@/constants';
 import { getAuthorizationHeader } from '@/utils/auth';
-import { Button, Col, Modal, ModalProps, Row, Upload } from 'antd';
+import { Image } from '@nextui-org/react';
+import { Button, Modal, ModalProps, Upload } from 'antd';
 import React, { useState } from 'react';
 import { useMount } from 'react-use';
 
@@ -17,27 +18,13 @@ const FileInfoCardLayout: React.FC<{ file: FileInfo; onClick: () => void }> = ({
   onClick,
 }) => {
   return (
-    <Col span={6}>
-      <div
-        style={{
-          aspectRatio: 1,
-          height: '100%',
-          width: '100%',
-          border: '1px solid grey',
-          padding: 6,
-          borderRadius: 12,
-        }}
-        onClick={onClick}
-      >
-        <img
-          src={file.url}
-          width={'100%'}
-          height={'100%'}
-          style={{ objectFit: 'cover' }}
-          alt={file.fileName}
-        />
-      </div>
-    </Col>
+    <Image
+      onClick={onClick}
+      isZoomed
+      alt={file.fileName}
+      src={file.url}
+      className={'object-contain w-full aspect-square bg-secondary-50'}
+    />
   );
 };
 
@@ -72,7 +59,7 @@ const MyFileSelection: React.FC<MyFileSelectionProp & ModalProps> = ({
           </Button>
         </Upload>
       </div>
-      <Row gutter={{ xs: 4, sm: 8, md: 12, lg: 16 }}>
+      <div className={'grid grid-cols-4 gap-2'}>
         {files.map((value) => {
           return (
             <FileInfoCardLayout
@@ -82,7 +69,7 @@ const MyFileSelection: React.FC<MyFileSelectionProp & ModalProps> = ({
             />
           );
         })}
-      </Row>
+      </div>
     </Modal>
   );
 };

@@ -2,14 +2,14 @@ import { defineConfig } from '@umijs/max';
 
 export default defineConfig({
   antd: {
-    theme: {
-      token: {
-        colorPrimary: '#d21279',
-        colorInfo: '#d21279',
-        colorSuccess: '#4fb51c',
-        colorWarning: '#f7a500',
-      },
-    },
+    // theme: {
+    //   token: {
+    //     colorPrimary: "#d21279",
+    //     colorInfo: "#d21279",
+    //     colorSuccess: "#4fb51c",
+    //     colorWarning: "#f7a500",
+    //   },
+    // },
   },
   access: {},
   model: {},
@@ -207,5 +207,7 @@ export default defineConfig({
       ],
     },
   ],
+
   npmClient: 'pnpm',
+  tailwindcss: {},
 });
