@@ -22,7 +22,7 @@ export async function MyVersionListApi(
  * @constructor
  */
 export async function MyVersionSaveApi(params: any): Promise<Result<Version>> {
-  return request('/api/version/save', {
+  return request('/api/admin/version/save', {
     method: 'POST',
     data: params,
   });
@@ -33,8 +33,8 @@ export async function MyVersionSaveApi(params: any): Promise<Result<Version>> {
  * @param id
  * @constructor
  */
-export async function MyVersionDeleteApi(id: number) {
-  return request('/api/version/delete', {
+export async function MyVersionDeleteApi(id: number) : Promise<Result<boolean>> {
+  return request('/api/admin/version/delete', {
     method: 'DELETE',
     params: {
       id: id,

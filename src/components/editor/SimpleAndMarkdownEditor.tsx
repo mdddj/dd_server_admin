@@ -3,8 +3,6 @@ import {
   ProFormItemProps,
   ProFormTextArea,
 } from '@ant-design/pro-components';
-import MDEditor from '@uiw/react-md-editor';
-import markdown from '@wcj/markdown-to-html';
 import { Switch } from 'antd';
 import React, { useState } from 'react';
 /**
@@ -40,11 +38,7 @@ const SimpleAndMarkdownEditor: React.FC<
           extra={s()}
           {...props}
         >
-          <MDEditor
-            onChange={(value) => {
-              props.onChange?.(value ?? '', markdown(value) as string);
-            }}
-          />
+
         </ProFormItem>
       )}
       {!mk && (

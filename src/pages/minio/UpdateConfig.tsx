@@ -28,7 +28,7 @@ export default function MinioUpdateComponent(props:{onUpdated: () => void}) {
       title={'编辑 Minio 配置'}
       initialValues={data}
       onFinish={onSubmitUpdate}
-      trigger={<Button type={'primary'}>修改</Button>}
+      trigger={<Button size={'small'} type={'primary'}>修改</Button>}
     >
       <ProFormText
         name={'endpoint'}

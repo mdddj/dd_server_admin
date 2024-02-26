@@ -1,7 +1,7 @@
 import { DeleteFileById, GetAllFile } from '@/services/file/FileController';
 import { FileInfo } from '@/services/file/type';
 import { PageContainer, ProList } from '@ant-design/pro-components';
-import { Avatar, Button, Card, Popconfirm, Space, message } from 'antd';
+import {Avatar, Button, Card, Popconfirm, Space, message, Typography,Tooltip} from 'antd';
 
 export default function Page() {
   return (
@@ -20,6 +20,9 @@ export default function Page() {
           metas={{
             title: {
               dataIndex: 'fileName',
+                render: (dom, entity) => {
+                  return <Tooltip title={entity.url}><Typography.Paragraph copyable={{text: entity.url}}>{dom}</Typography.Paragraph></Tooltip>
+                }
             },
             avatar: {
               dataIndex: 'url',

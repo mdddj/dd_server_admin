@@ -1,3 +1,4 @@
+import MarkdownEditor from '@/components/MarkdownEditor';
 import FileSelectWidget from '@/components/file/FileSelectComponent';
 import TagSelect from '@/components/tag/BlogTagSelect';
 import {
@@ -8,7 +9,6 @@ import {
 import { Blog, BlogCategory } from '@/types/blog';
 import { useSearchParams } from '@@/exports';
 import { PageContainer } from '@ant-design/pro-components';
-import MDEditor from '@uiw/react-md-editor';
 import markdown from '@wcj/markdown-to-html';
 import { Button, Card, Form, Input, Select, message } from 'antd';
 import React, { useEffect, useState } from 'react';
@@ -19,6 +19,8 @@ const Page: React.FC = () => {
   const [categoryList, setCategoryList] = useState<BlogCategory[]>([]);
   const [tags, setTags] = useState<string[]>([]);
   const [blog, setBlog] = useState<Blog | undefined>();
+
+  const [content, setContent] = useState('');
 
   let updateId = searchParams.get('update');
 
@@ -33,12 +35,12 @@ const Page: React.FC = () => {
     setTags(result.data.tags.map((value) => value.name));
     form.setFieldsValue({
       categoryId: result.data.category.id,
-      content: result.data.content,
       title: result.data.title,
       alias: result.data.aliasString,
       thumbnail: result.data.thumbnail,
       id: result.data.id,
     });
+    setContent(result.data.content);
   };
 
   useEffect(() => {
@@ -55,13 +57,12 @@ const Page: React.FC = () => {
   }, [tags, updateId]);
 
   const push = async (values: Blog) => {
-    console.log(values);
     const hide = message.loading('正在发布');
     const html = markdown(values.content);
     if (typeof html === 'string') {
       values.html = html;
     }
-    const result = await PushOneBlog(values);
+    const result = await PushOneBlog({ ...values, content: content });
     message.success(result.message);
     hide();
   };
@@ -106,17 +107,8 @@ const Page: React.FC = () => {
               ))}
             </Select>
           </Form.Item>
-          <Form.Item
-            label={'正文'}
-            name={'content'}
-            rules={[
-              {
-                required: true,
-                message: '请输入正文内容',
-              },
-            ]}
-          >
-            <MDEditor></MDEditor>
+          <Form.Item label={'正文'}>
+            <MarkdownEditor onChange={setContent} value={content} />
           </Form.Item>
           <Form.Item label={'别名'} name={'alias'}>
             <Input />

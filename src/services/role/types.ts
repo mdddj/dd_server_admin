@@ -1,4 +1,4 @@
-export interface Role {
+export interface RoleModel {
   id?: number;
   name: string;
   note?: string;

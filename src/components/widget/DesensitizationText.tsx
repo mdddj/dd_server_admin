@@ -1,5 +1,5 @@
 import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 type DesensitizationTextWidgetProp = {
   text?: string;
@@ -60,18 +60,25 @@ const DesensitizationTextWidget: React.FC<DesensitizationTextWidgetProp> = ({
       }
     }
   };
+  if(text === undefined || text.length === 0) return <span></span>;
   return (
-    <>
-      {show ? text : changeText(text)}
+    <span>
+       {show ? text : changeText(text)}
       {show ? (
         <EyeInvisibleOutlined
+          className={'ml-2'}
           onClick={() => setShow(false)}
           style={{ marginLeft: 2 }}
         />
       ) : (
-        <EyeOutlined onClick={() => setShow(true)} style={{ marginLeft: 2 }} />
+        <EyeOutlined
+          className={'ml-2'}
+          onClick={() => setShow(true)}
+          style={{ marginLeft: 2 }}
+        />
       )}
-    </>
+
+    </span>
   );
 };
 

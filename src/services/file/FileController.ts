@@ -26,3 +26,17 @@ export async function DeleteFileById(id: number) {
     params: { id },
   });
 }
+
+/**
+ * 上传文件.
+ * @param file
+ */
+export async function uploadSimpleFile(file: File): Promise<string> {
+  let form = new FormData();
+  form.append('file', file);
+  let r = await request<Result<string>>('/api/auth/simple-upload', {
+    method: 'POST',
+    data: form,
+  });
+  return r.data;
+}

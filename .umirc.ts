@@ -190,6 +190,30 @@ export default defineConfig({
       ],
     },
     {
+      name: '友链',
+      path: '/friend',
+      icon: 'ProjectOutlined',
+      routes: [
+        {
+          name:"列表",
+          path:"/friend/list",
+          component: './Friend/index'
+        }
+      ]
+    },
+    {
+      name: '字典',
+      path: '/text',
+      icon: 'ProjectOutlined',
+      routes: [
+        {
+          name:"列表",
+          path:"/text/list",
+          component: './Text/List'
+        }
+      ]
+    },
+    {
       name: '项目管理',
       path: '/project',
       icon: 'ProjectOutlined',
@@ -210,4 +234,5 @@ export default defineConfig({
 
   npmClient: 'pnpm',
   tailwindcss: {},
+  esbuildMinifyIIFE: true
 });
